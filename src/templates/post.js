@@ -1,6 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+
+const Container = styled.div`
+  margin: 3rem auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Template = ({ data }) => {
   const {
@@ -8,11 +18,11 @@ const Template = ({ data }) => {
   } = data;
 
   return (
-    <div className="post">
-      <h1>{frontmatter.title}</h1>
-      <p>{frontmatter.date}</p>
-      <MDXRenderer>{body}</MDXRenderer>
-    </div>
+    <Container>
+        <h1>{frontmatter.title}</h1>
+        <p>{frontmatter.date}</p>
+        <MDXRenderer>{body}</MDXRenderer>
+    </Container>
   );
 };
 
