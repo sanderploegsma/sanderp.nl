@@ -1,16 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import { graphql } from "gatsby";
+import { Box, Heading, Text } from "grommet";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
-const Container = styled.div`
-  margin: 3rem auto;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+import Layout from "../components/Layout";
+import FormattedDate from "../components/date";
 
 const Template = ({ data }) => {
   const {
@@ -18,11 +12,17 @@ const Template = ({ data }) => {
   } = data;
 
   return (
-    <Container>
-        <h1>{frontmatter.title}</h1>
-        <p>{frontmatter.date}</p>
+    <Layout>
+      <Box pad={{ horizontal: "xlarge", vertical: "medium" }}>
+        <Heading size="medium" level={1}>
+          {frontmatter.title}
+        </Heading>
+        <Text>
+          <FormattedDate date={frontmatter.date} />
+        </Text>
         <MDXRenderer>{body}</MDXRenderer>
-    </Container>
+      </Box>
+    </Layout>
   );
 };
 

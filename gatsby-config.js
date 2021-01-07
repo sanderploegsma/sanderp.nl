@@ -8,6 +8,14 @@ module.exports = {
       options: {
         gatsbyRemarkPlugins: [
           {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              aliases: {
+                sh: `bash`,
+              },
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               // It's important to specify the maxWidth (in pixels) of

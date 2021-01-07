@@ -1,6 +1,7 @@
 ---
 title: Debugging Golang concurrency issues
-date: 2017-09-14
+# date: 2017-09-14
+date: 2020-12-14
 slug: debugging-golang-concurrency-issues-c979c588f9ea
 ---
 
@@ -12,7 +13,7 @@ Basically, a master process queries entities and publishes them to a Pub/Sub top
 To make sure the Pub/Sub topic and subscription are cleaned up afterwards, I made sure the master waits until all entities are processed before cleaning up and exiting.
 The following snippet contains the code I used to do just that.
 
-```golang
+```go
 // waitUntilQueueEmpty subscribes on the queue and returns when no messages arrive for more than 5 seconds
 // all received messages are not acknowledged in order to return them to the queue so that workers can process them
 func (m *master) waitUntilQueueEmpty(ctx context.Context, sub *pubsub.Subscription) error {
@@ -43,7 +44,7 @@ func (m *master) waitUntilQueueEmpty(ctx context.Context, sub *pubsub.Subscripti
 This all worked great, the master process ran for as long as it took the workers to process all entities, after which it exited with everything cleaned up nicely. Or so I thought.
 
 While writing my integration tests that run the entire process against the Datastore and Pub/Sub emulators I noticed that sometimes not all entities were processed correctly.
-Me being suspicious, I tried running the tests using the -race flag, which gave me the following output (I removed the file paths for brevity and possible NDA-ness):
+Me being suspicious, I tried running the tests using the `-race` flag, which gave me the following output (I removed the file paths for brevity and possible NDA-ness):
 
 ```
 ❯ go test -v -race ./...
@@ -72,7 +73,7 @@ Looking at the code I realised that I made the exact same mistake they showed in
 I was reading and writing the lastMessageTimestamp in two different goroutines. Luckily for me, the fix used in the blog post was just as usable for me.
 Using the code below the race detector was happy and my random failures disappeared.
 
-```golang
+```go
 // waitUntilQueueEmpty subscribes on the queue and returns when no messages arrive for more than 5 seconds
 // all received messages are not acknowledged in order to return them to the queue so that workers can process them
 func (m *master) waitUntilQueueEmpty(ctx context.Context, sub *pubsub.Subscription) error {
@@ -100,4 +101,4 @@ func (m *master) waitUntilQueueEmpty(ctx context.Context, sub *pubsub.Subscripti
 }
 ```
 
-So if you haven’t already, just try running your app or tests using the -race flag. Who knows, you might find that nasty bug you’ve been debugging for days!
+So if you haven’t already, just try running your app or tests using the `-race` flag. Who knows, you might find that nasty bug you’ve been debugging for days!

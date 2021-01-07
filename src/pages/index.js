@@ -1,29 +1,32 @@
 import React from "react";
-import styled from "styled-components";
 import { graphql, Link } from "gatsby";
+import { Box, Heading, Text } from "grommet";
 
-const Container = styled.div`
-  margin: 3rem auto;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PostLink = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-  padding: 1rem;
-  background-color: #ddd;
-`;
+import Layout from "../components/Layout";
+import FormattedDate from "../components/date";
 
 const Post = ({ post }) => (
-  <PostLink to={post.frontmatter.slug || post.slug}>
-    <p>{post.frontmatter.title}</p>
-    <p>{post.frontmatter.date}</p>
-  </PostLink>
+  <Box direction="column" pad="medium" background="light-1">
+    <Heading
+      size="medium"
+      level={2}
+      as={Link}
+      to={post.frontmatter.slug || post.slug}
+    >
+      {post.frontmatter.title}
+    </Heading>
+    <Box
+      direction="row-responsive"
+      justify="between"
+      pad={{ vertical: "small" }}
+    >
+      <Text size="small">
+        <FormattedDate date={post.frontmatter.date} />
+      </Text>
+      <Text size="small">{post.timeToRead} minutes read time</Text>
+    </Box>
+    <Text>{post.excerpt}</Text>
+  </Box>
 );
 
 const IndexPage = ({ data }) => {
@@ -32,11 +35,20 @@ const IndexPage = ({ data }) => {
   } = data;
 
   return (
-    <Container>
-      {edges.map(({ node }) => (
-        <Post key={node.id} post={node} />
-      ))}
-    </Container>
+    <Layout>
+      <Box
+        direction="column"
+        gap="medium"
+        pad={{ horizontal: "xlarge", vertical: "medium" }}
+      >
+        <Heading size="medium" level={1}>
+          Blog posts
+        </Heading>
+        {edges.map(({ node }) => (
+          <Post key={node.id} post={node} />
+        ))}
+      </Box>
+    </Layout>
   );
 };
 
@@ -47,6 +59,8 @@ export const query = graphql`
         node {
           id
           slug
+          excerpt(pruneLength: 200)
+          timeToRead
           frontmatter {
             title
             date
