@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import FormattedDate from "../components/date";
 
 const Post = ({ post }) => (
-  <Box direction="column" pad="medium" background="light-1">
+  <Box direction="column" pad="medium" background="background-back">
     <Heading
       size="medium"
       level={2}
