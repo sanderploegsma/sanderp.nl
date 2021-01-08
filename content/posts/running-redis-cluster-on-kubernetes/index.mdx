@@ -4,14 +4,6 @@ date: 2017-05-30
 slug: running-redis-cluster-on-kubernetes-e451bda76cad
 ---
 
-_Update (2018–08–22): as some people pointed out in the comments, the cluster breaks when one of the nodes is restarted and gets a new IP address assigned. I updated the post with a script that should fix this._
-
-_Update (2018–08–22): [@riaan53](https://github.com/riaan53) pointed out that the cluster commands previously handled by `redis-trib` will become part of the official `redis-cli` in Redis 5.0. I updated the example to use the latest 5.0 RC instead of a custom image._
-
-_Note: the full example can be found [here](https://github.com/sanderploegsma/redis-cluster)_
-
----
-
 After successfully running a single Redis GCE instance to manage our inter-service communication for a couple of years, we finally started to run into scaling issues.
 To solve these, we started working out a way to reliably run a set of Redis instances as a cluster in our Kubernetes cluster.
 
@@ -138,3 +130,5 @@ These steps are documented [in the example](https://github.com/sanderploegsma/re
 
 - If you would like to try this for yourself, you can check out the full [example on GitHub](https://github.com/sanderploegsma/redis-cluster), which you can run using the excellent [minikube](https://kubernetes.io/docs/getting-started-guides/minikube/) platform or by starting a Kubernetes cluster in the newer versions of Docker for Mac/Windows.
 - Although this setup works great if you just store values, you will run into scaling issues as soon as you start using Redis PubSub. This is because PubSub channels are not hashed the way normal keys are, but _every message is automatically published to every node_. There is some [discussion](https://github.com/antirez/redis/issues/2672) going on about this and it might be solved in [Redis 4.0](https://github.com/antirez/redis/pull/3381), but until then there is no good way of combining PubSub with Redis Cluster if you have a lot of messages going through.
+- Update (2018–08–22): as some people pointed out in the comments, the cluster breaks when one of the nodes is restarted and gets a new IP address assigned. I updated the post with a script that should fix this.
+- Update (2018–08–22): [@riaan53](https://github.com/riaan53) pointed out that the cluster commands previously handled by `redis-trib` will become part of the official `redis-cli` in Redis 5.0. I updated the example to use the latest 5.0 RC instead of a custom image.
