@@ -1,12 +1,14 @@
 import "./layout.css";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "gatsby";
 import { grommet } from "grommet/themes";
 import { Anchor, Button, Box, Grommet, Nav, Text } from "grommet";
 import { Github, Linkedin, Sun, Moon } from "grommet-icons";
 
+import { ThemeContext } from "../context/ThemeContext";
+
 const Layout = ({ children }) => {
-  const [mode, setMode] = useState("light");
+  const { mode, toggleMode } = useContext(ThemeContext);
   return (
     <Grommet full theme={grommet} themeMode={mode}>
       <Box
@@ -28,9 +30,7 @@ const Layout = ({ children }) => {
           <Anchor
             icon={mode === "light" ? <Moon /> : <Sun />}
             as={Button}
-            onClick={(e) => {
-              setMode(mode === "light" ? "dark" : "light");
-            }}
+            onClick={toggleMode}
           />
         </Nav>
       </Box>
