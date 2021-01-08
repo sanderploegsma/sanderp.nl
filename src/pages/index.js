@@ -26,7 +26,7 @@ const Post = ({ post }) => (
       <Text size="small">
         <FormattedDate date={post.frontmatter.date} />
       </Text>
-      <Text size="small">{post.timeToRead} minutes read time</Text>
+      <Text size="small">{post.timeToRead} min read</Text>
     </CardFooter>
   </Card>
 );
