@@ -69,7 +69,7 @@ FAIL app/test 20.607s
 ```
 
 Looking at the code I realised that I made the exact same mistake they showed in Golang’s own blog post on race detection:
-I was reading and writing the lastMessageTimestamp in two different goroutines. Luckily for me, the fix used in the blog post was just as usable for me.
+I was reading and writing the `lastMessageTimestamp` in two different goroutines. Luckily for me, the fix used in the blog post was just as usable for me.
 Using the code below the race detector was happy and my random failures disappeared.
 
 ```go
