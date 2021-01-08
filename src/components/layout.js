@@ -5,7 +5,7 @@ import { grommet } from "grommet/themes";
 import { Anchor, Button, Box, Grommet, Nav, Text } from "grommet";
 import { Github, Linkedin, Sun, Moon } from "grommet-icons";
 
-import { ThemeContext } from "../context/ThemeContext";
+import { ThemeContext, Modes } from "../context/ThemeContext";
 
 const Layout = ({ children }) => {
   const { mode, toggleMode } = useContext(ThemeContext);
@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
             href="https://linkedin.com/in/sanderploegsma"
           />
           <Anchor
-            icon={mode === "light" ? <Moon /> : <Sun />}
+            icon={mode === Modes.light ? <Moon /> : <Sun />}
             as={Button}
             onClick={toggleMode}
           />
