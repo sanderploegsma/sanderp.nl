@@ -1,32 +1,34 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import { Box, Heading, Text } from "grommet";
+import {
+  Anchor,
+  Box,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Heading,
+  Text,
+} from "grommet";
 
 import Layout from "../components/Layout";
 import FormattedDate from "../components/date";
 
 const Post = ({ post }) => (
-  <Box direction="column" pad="medium" background="background-back">
-    <Heading
-      size="medium"
-      level={2}
-      as={Link}
-      to={post.frontmatter.slug || post.slug}
-    >
-      {post.frontmatter.title}
-    </Heading>
-    <Box
-      direction="row-responsive"
-      justify="between"
-      pad={{ vertical: "small" }}
-    >
+  <Card background={{ dark: "dark-1", light: "light-1" }}>
+    <CardHeader pad="medium">
+      <Anchor as={Link} to={post.frontmatter.slug || post.slug}>
+        {post.frontmatter.title}
+      </Anchor>
+    </CardHeader>
+    <CardBody pad={{ horizontal: "medium" }}>{post.excerpt}</CardBody>
+    <CardFooter pad={{ horizontal: "medium", top: "medium", bottom: "small" }}>
       <Text size="small">
         <FormattedDate date={post.frontmatter.date} />
       </Text>
       <Text size="small">{post.timeToRead} minutes read time</Text>
-    </Box>
-    <Text>{post.excerpt}</Text>
-  </Box>
+    </CardFooter>
+  </Card>
 );
 
 const IndexPage = ({ data }) => {
