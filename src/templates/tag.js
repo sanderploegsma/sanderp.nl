@@ -5,10 +5,12 @@ import { Box, Heading } from "grommet";
 import Layout from "../components/layout";
 import PostLink from "../blocks/PostLink";
 
-const IndexPage = ({ data }) => {
+const Template = ({ data, pageContext }) => {
   const {
     allMdx: { edges },
   } = data;
+
+  const { tag } = pageContext;
 
   return (
     <Layout>
@@ -17,8 +19,8 @@ const IndexPage = ({ data }) => {
         gap="medium"
         pad={{ horizontal: "xlarge", vertical: "medium" }}
       >
-        <Heading size="medium" level={1}>
-          Blog posts
+        <Heading size="medium" level={3}>
+          Blog posts tagged with "{tag}"
         </Heading>
         {edges.map(({ node }) => (
           <PostLink key={node.id} post={node} />
@@ -28,9 +30,14 @@ const IndexPage = ({ data }) => {
   );
 };
 
-export const query = graphql`
-  query IndexPageQuery {
-    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000) {
+export const pageQuery = graphql`
+  query TagPageQuery($tag: String!) {
+    allMdx(
+      limit: 1000
+      sort: { order: DESC, fields: [frontmatter___date] }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
+      totalCount
       edges {
         node {
           id
@@ -41,4 +48,4 @@ export const query = graphql`
   }
 `;
 
-export default IndexPage;
+export default Template;

@@ -44,7 +44,6 @@ const Layout = ({ children }) => {
         align="center"
         margin={{ top: "medium" }}
         pad={{ horizontal: "medium", vertical: "small" }}
-        justify="between"
       >
         <Text>Copyright © {new Date().getFullYear()}</Text>
         <Nav direction="row">
