@@ -1,4 +1,12 @@
 module.exports = {
+  siteMetadata: {
+    siteUrl: "https://sanderp.nl",
+    sourceUrl: "https://github.com/sanderploegsma/sanderp.nl",
+    social: {
+      github: "https://github.com/sanderploegsma",
+      linkedin: "https://linkedin.com/in/sanderploegsma",
+    },
+  },
   plugins: [
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sharp`,
