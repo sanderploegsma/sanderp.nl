@@ -14,11 +14,11 @@ const Template = ({ data }) => {
   return (
     <Layout>
       <Box pad={{ horizontal: "xlarge", vertical: "medium" }}>
-        <Heading size="medium" level={1}>
+        <Heading size="medium" level={1} margin={{ bottom: "small" }}>
           {frontmatter.title}
         </Heading>
         <Text>
-          <FormattedDate date={frontmatter.date} />
+          Published <FormattedDate date={frontmatter.date} />
         </Text>
         <MDXRenderer>{body}</MDXRenderer>
       </Box>
