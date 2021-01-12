@@ -1,8 +1,13 @@
+require("dotenv").config();
+
+// https://docs.netlify.com/configure-builds/environment-variables/
+const { DEPLOY_URL, REPOSITORY_URL, URL } = process.env;
+
 module.exports = {
   siteMetadata: {
     title: "Sander Ploegsma",
-    siteUrl: "https://sanderp.nl",
-    sourceUrl: "https://github.com/sanderploegsma/sanderp.nl",
+    siteUrl: DEPLOY_URL || URL || "https://sanderp.nl",
+    sourceUrl: REPOSITORY_URL || "https://github.com/sanderploegsma/sanderp.nl",
     social: {
       github: "https://github.com/sanderploegsma",
       linkedin: "https://linkedin.com/in/sanderploegsma",
