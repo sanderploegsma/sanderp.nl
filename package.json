@@ -27,6 +27,7 @@
     "gatsby-image": "^2.9.0",
     "gatsby-plugin-google-gtag": "^2.6.0",
     "gatsby-plugin-mdx": "^1.8.0",
+    "gatsby-plugin-react-helmet": "^3.8.0",
     "gatsby-plugin-sharp": "^2.12.0",
     "gatsby-plugin-styled-components": "^3.8.0",
     "gatsby-remark-images": "^3.9.0",
@@ -37,6 +38,7 @@
     "grommet-icons": "^4.5.0",
     "prettier": "^2.2.1",
     "prismjs": "^1.23.0",
+    "react-helmet": "^6.1.0",
     "styled-components": "^5.2.1"
   }
 }

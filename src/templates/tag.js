@@ -1,19 +1,26 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { Box, Heading } from "grommet";
+import { kebabCase } from "lodash";
 
 import Layout from "../components/layout";
 import PostLink from "../blocks/PostLink";
+import { Helmet } from "react-helmet";
 
 const Template = ({ data, pageContext }) => {
-  const {
-    allMdx: { edges },
-  } = data;
-
+  const { site, posts } = data;
   const { tag } = pageContext;
+
+  const pageTitle = `Posts tagged with "${tag}" - ${site.siteMetadata.title}`;
+  const pageUrl = `${site.siteMetadata.siteUrl}/tags/${kebabCase(tag)}`;
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{pageTitle}</title>
+        <link rel="canonical" href={pageUrl} />
+      </Helmet>
       <Box
         direction="column"
         gap="medium"
@@ -22,7 +29,7 @@ const Template = ({ data, pageContext }) => {
         <Heading size="medium" level={3}>
           Blog posts tagged with "{tag}"
         </Heading>
-        {edges.map(({ node }) => (
+        {posts.edges.map(({ node }) => (
           <PostLink key={node.id} post={node} />
         ))}
       </Box>
@@ -32,7 +39,13 @@ const Template = ({ data, pageContext }) => {
 
 export const pageQuery = graphql`
   query TagPageQuery($tag: String!) {
-    allMdx(
+    site {
+      siteMetadata {
+        title
+        siteUrl
+      }
+    }
+    posts: allMdx(
       limit: 1000
       sort: { order: DESC, fields: [frontmatter___date] }
       filter: { frontmatter: { tags: { in: [$tag] } } }

@@ -1,5 +1,6 @@
 module.exports = {
   siteMetadata: {
+    title: "Sander Ploegsma",
     siteUrl: "https://sanderp.nl",
     sourceUrl: "https://github.com/sanderploegsma/sanderp.nl",
     social: {
@@ -11,6 +12,7 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-mdx`,
       options: {

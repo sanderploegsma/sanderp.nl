@@ -1,17 +1,24 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { Box, Heading } from "grommet";
+import { Helmet } from "react-helmet";
 
 import Layout from "../components/layout";
 import PostLink from "../blocks/PostLink";
 
 const IndexPage = ({ data }) => {
-  const {
-    allMdx: { edges },
-  } = data;
+  const { site, posts } = data;
+
+  const pageTitle = site.siteMetadata.title;
+  const pageUrl = site.siteMetadata.siteUrl;
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{pageTitle}</title>
+        <link rel="canonical" href={pageUrl} />
+      </Helmet>
       <Box
         direction="column"
         gap="medium"
@@ -20,7 +27,7 @@ const IndexPage = ({ data }) => {
         <Heading size="medium" level={1}>
           Blog posts
         </Heading>
-        {edges.map(({ node }) => (
+        {posts.edges.map(({ node }) => (
           <PostLink key={node.id} post={node} />
         ))}
       </Box>
@@ -30,7 +37,16 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query IndexPageQuery {
-    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000) {
+    site {
+      siteMetadata {
+        title
+        siteUrl
+      }
+    }
+    posts: allMdx(
+      sort: { order: DESC, fields: [frontmatter___date] }
+      limit: 1000
+    ) {
       edges {
         node {
           id
