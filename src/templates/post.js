@@ -21,9 +21,16 @@ const Template = ({ data }) => {
   return (
     <Layout>
       <Helmet>
-        <meta charSet="utf-8" />
+        <html lang="en" />
         <title>{pageTitle}</title>
         <link rel="canonical" href={pageUrl} />
+        <meta charSet="utf-8" />
+        <meta property="description" content={post.excerpt} />
+        <meta property="keywords" content={post.frontmatter.tags.join(", ")} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:type" content="blog" />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:url" content={pageUrl} />
       </Helmet>
       <Box pad={{ horizontal: "xlarge", vertical: "medium" }}>
         <Heading size="medium" level={1} margin={{ bottom: "small" }}>
@@ -74,6 +81,7 @@ export const pageQuery = graphql`
       }
       slug
       body
+      excerpt(pruneLength: 200)
     }
   }
 `;

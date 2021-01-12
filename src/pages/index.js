@@ -15,9 +15,13 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Helmet>
+        <html lang="en" />
         <meta charSet="utf-8" />
         <title>{pageTitle}</title>
         <link rel="canonical" href={pageUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={pageUrl} />
       </Helmet>
       <Box
         direction="column"
