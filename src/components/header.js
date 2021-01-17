@@ -21,6 +21,7 @@ const Header = ({ mode, toggleMode, social }) => (
     p={[2, 2, 3]}
     alignItems="center"
     justifyContent="space-between"
+    sx={{ backgroundColor: "bgDark" }}
   >
     <Link as={InternalLink} to="/">
       Sander Ploegsma
