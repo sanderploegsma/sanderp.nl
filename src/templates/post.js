@@ -1,11 +1,12 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql, Link as InternalLink } from "gatsby";
 import { kebabCase } from "lodash";
-import { Anchor, Box, Heading, Text } from "grommet";
+import { Flex, Heading, Link, Text } from "rebass";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Helmet } from "react-helmet";
 
 import Layout from "../components/layout";
+import Container from "../components/container";
 import FormattedDate from "../components/date";
 
 const Template = ({ data }) => {
@@ -32,34 +33,29 @@ const Template = ({ data }) => {
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:url" content={pageUrl} />
       </Helmet>
-      <Box pad={{ horizontal: "xlarge", vertical: "medium" }}>
-        <Heading size="medium" level={1} margin={{ bottom: "small" }}>
-          {post.frontmatter.title}
-        </Heading>
+      <Container mb={3}>
+        <Heading>{post.frontmatter.title}</Heading>
 
-        <Text color="dark-3">
+        <Text mt={2}>
           Published <FormattedDate date={post.frontmatter.date} />
         </Text>
         {post.frontmatter.tags && (
-          <Box
-            direction="row-responsive"
-            gap="small"
-            justify="start"
-            margin={{ top: "small" }}
-          >
-            <Text color="dark-3">Tags:</Text>
+          <Flex mt={2}>
+            <Text>Tags:</Text>
             {post.frontmatter.tags.map((tag) => (
-              <Anchor
-                as={Link}
+              <Link
+                ml={2}
+                as={InternalLink}
                 to={`/tags/${kebabCase(tag)}`}
-                label={tag}
                 key={kebabCase(tag)}
-              />
+              >
+                {tag}
+              </Link>
             ))}
-          </Box>
+          </Flex>
         )}
         <MDXRenderer>{post.body}</MDXRenderer>
-      </Box>
+      </Container>
     </Layout>
   );
 };

@@ -1,22 +1,19 @@
 import "./layout.css";
-import React, { useContext } from "react";
-import { grommet } from "grommet/themes";
-import { Box, Grommet } from "grommet";
+import React from "react";
+import { Box } from "rebass";
 
 import Header from "./header";
 import Footer from "./footer";
-import { ThemeContext } from "../context/ThemeContext";
 
 const Layout = ({ children }) => {
-  const { mode } = useContext(ThemeContext);
   return (
-    <Grommet full theme={grommet} themeMode={mode}>
+    <>
       <Header />
-      <Box as="main" pad="small">
+      <Box as="main" p={2}>
         {children}
       </Box>
       <Footer />
-    </Grommet>
+    </>
   );
 };
 

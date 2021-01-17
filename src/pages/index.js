@@ -1,8 +1,9 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Box, Heading } from "grommet";
+import { Box, Heading } from "rebass";
 import { Helmet } from "react-helmet";
 
+import Container from "../components/container";
 import Layout from "../components/layout";
 import PostLink from "../blocks/PostLink";
 
@@ -23,18 +24,14 @@ const IndexPage = ({ data }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={pageUrl} />
       </Helmet>
-      <Box
-        direction="column"
-        gap="medium"
-        pad={{ horizontal: "xlarge", vertical: "medium" }}
-      >
-        <Heading size="medium" level={1}>
-          Blog posts
-        </Heading>
+      <Container mb={3}>
+        <Heading>Blog posts</Heading>
         {posts.edges.map(({ node }) => (
-          <PostLink key={node.id} post={node} />
+          <Box mt={3}>
+            <PostLink key={node.id} post={node} />
+          </Box>
         ))}
-      </Box>
+      </Container>
     </Layout>
   );
 };

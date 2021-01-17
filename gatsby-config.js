@@ -14,7 +14,6 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-styled-components`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,
     `gatsby-plugin-react-helmet`,

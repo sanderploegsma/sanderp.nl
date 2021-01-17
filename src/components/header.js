@@ -1,31 +1,46 @@
 import React, { useContext } from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
-import { Anchor, Button, Box, Nav } from "grommet";
-import { Github, Linkedin, Sun, Moon } from "grommet-icons";
+import { graphql, Link as InternalLink, useStaticQuery } from "gatsby";
+import { Box, Link, Button, Flex } from "rebass";
+import { FaGithub, FaLinkedin, FaSun, FaMoon } from "react-icons/fa";
 
-import { ThemeContext, Modes } from "../context/ThemeContext";
+import { ThemeContext, Modes } from "../theme";
+
+const ThemeToggle = ({ mode, toggleMode }) => {
+  const Icon = mode === Modes.light ? FaMoon : FaSun;
+
+  return (
+    <Button onClick={toggleMode}>
+      <Icon />
+    </Button>
+  );
+};
 
 const Header = ({ mode, toggleMode, social }) => (
-  <Box
+  <Flex
     as="header"
-    direction="row"
-    align="center"
-    justify="between"
-    elevation="small"
-    pad={{ horizontal: "medium", vertical: "small" }}
-    background={{ dark: "dark-1", light: "light-1" }}
+    p={[2, 2, 3]}
+    alignItems="center"
+    justifyContent="space-between"
   >
-    <Anchor label="Sander Ploegsma" as={Link} to="/" />
-    <Nav direction="row">
-      {social.github && <Anchor icon={<Github />} href={social.github} />}
-      {social.linkedin && <Anchor icon={<Linkedin />} href={social.linkedin} />}
-      <Anchor
-        icon={mode === Modes.light ? <Moon /> : <Sun />}
-        as={Button}
-        onClick={toggleMode}
-      />
-    </Nav>
-  </Box>
+    <Link as={InternalLink} to="/">
+      Sander Ploegsma
+    </Link>
+    <Flex alignItems="center" justifyContent="space-between">
+      {social.github && (
+        <Link href={social.github}>
+          <FaGithub />
+        </Link>
+      )}
+      {social.linkedin && (
+        <Link ml={3} href={social.linkedin}>
+          <FaLinkedin />
+        </Link>
+      )}
+      <Box ml={3}>
+        <ThemeToggle mode={mode} toggleMode={toggleMode} />
+      </Box>
+    </Flex>
+  </Flex>
 );
 
 export default () => {

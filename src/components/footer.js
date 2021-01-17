@@ -1,24 +1,22 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import { Anchor, Box, Nav, Text } from "grommet";
-import { Github } from "grommet-icons";
+import { Link, Text, Flex } from "rebass";
+import { FaGithub } from "react-icons/fa";
 
 const Footer = ({ sourceUrl }) => (
-  <Box
+  <Flex
     as="footer"
-    direction="row"
-    justify="between"
-    align="center"
-    margin={{ top: "medium" }}
-    pad={{ horizontal: "medium", vertical: "small" }}
+    p={[2, 2, 3]}
+    alignItems="center"
+    justifyContent="space-between"
   >
     <Text>Copyright © {new Date().getFullYear()}</Text>
-    <Nav direction="row">
-      {sourceUrl && (
-        <Anchor icon={<Github />} label="Source code" href={sourceUrl} />
-      )}
-    </Nav>
-  </Box>
+    {sourceUrl && (
+      <Link href={sourceUrl}>
+        <FaGithub /> Source code
+      </Link>
+    )}
+  </Flex>
 );
 
 export default () => {

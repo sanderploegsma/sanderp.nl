@@ -1,7 +1,23 @@
 import "prismjs/themes/prism-okaidia.css";
 import React from "react";
-import { ThemeContextProvider } from "./src/context/ThemeContext";
+import { ThemeProvider } from "@emotion/react";
+
+import {
+  lightTheme,
+  darkTheme,
+  ThemeContextProvider,
+  ThemeContext,
+  Modes,
+} from "./src/theme";
 
 export const wrapRootElement = ({ element }) => (
-  <ThemeContextProvider>{element}</ThemeContextProvider>
+  <ThemeContextProvider>
+    <ThemeContext.Consumer>
+      {({ mode }) => (
+        <ThemeProvider theme={mode === Modes.light ? lightTheme : darkTheme}>
+          {element}
+        </ThemeProvider>
+      )}
+    </ThemeContext.Consumer>
+  </ThemeContextProvider>
 );
