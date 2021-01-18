@@ -5,6 +5,7 @@ import { kebabCase } from "lodash";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Helmet } from "react-helmet";
 
+import Comments from "../comments";
 import Container from "../container";
 import FormattedDate from "../date";
 import Layout from "../layout";
@@ -92,6 +93,7 @@ const Template = ({ data }) => {
             </div>
           )}
         </div>
+        <Comments sx={{ mt: 4 }} />
       </Container>
     </Layout>
   );
