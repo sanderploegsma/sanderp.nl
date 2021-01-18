@@ -7,6 +7,8 @@ export default (props) => {
   const commentBox = useRef();
 
   useEffect(() => {
+    const ref = commentBox.current;
+
     const theme = colorMode === "default" ? "github-light" : "github-dark";
     const scriptEl = document.createElement("script");
     scriptEl.setAttribute("src", "https://utteranc.es/client.js");
@@ -15,10 +17,10 @@ export default (props) => {
     scriptEl.setAttribute("repo", "sanderploegsma/sanderp.nl");
     scriptEl.setAttribute("issue-term", "pathname");
     scriptEl.setAttribute("theme", theme);
-    commentBox.current.appendChild(scriptEl);
+    ref.appendChild(scriptEl);
 
     return () => {
-      commentBox.current.removeChild(commentBox.current.firstChild);
+      ref.removeChild(ref.firstChild);
     };
   }, [commentBox, colorMode]);
 
