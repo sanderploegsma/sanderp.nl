@@ -1,12 +1,14 @@
-import React from "react";
-import { graphql, Link } from "gatsby";
+/** @jsx jsx */
+import { jsx, Styled } from "theme-ui";
+import { graphql } from "gatsby";
 import { kebabCase } from "lodash";
-import { Anchor, Box, Heading, Text } from "grommet";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Helmet } from "react-helmet";
 
-import Layout from "../components/layout";
-import FormattedDate from "../components/date";
+import Container from "../container";
+import FormattedDate from "../date";
+import Layout from "../layout";
+import Link from "../link";
 
 const Template = ({ data }) => {
   const { site, post } = data;
@@ -32,34 +34,32 @@ const Template = ({ data }) => {
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:url" content={pageUrl} />
       </Helmet>
-      <Box pad={{ horizontal: "xlarge", vertical: "medium" }}>
-        <Heading size="medium" level={1} margin={{ bottom: "small" }}>
-          {post.frontmatter.title}
-        </Heading>
-
-        <Text color="dark-3">
+      <Container>
+        <Styled.h2 sx={{ mb: 0 }}>{post.frontmatter.title}</Styled.h2>
+        <Styled.p sx={{ marginBlockStart: 0, color: "primary" }}>
           Published <FormattedDate date={post.frontmatter.date} />
-        </Text>
+        </Styled.p>
         {post.frontmatter.tags && (
-          <Box
-            direction="row-responsive"
-            gap="small"
-            justify="start"
-            margin={{ top: "small" }}
-          >
-            <Text color="dark-3">Tags:</Text>
-            {post.frontmatter.tags.map((tag) => (
-              <Anchor
-                as={Link}
-                to={`/tags/${kebabCase(tag)}`}
-                label={tag}
-                key={kebabCase(tag)}
-              />
-            ))}
-          </Box>
+          <div>
+            <Styled.p>
+              Tags:
+              <Styled.ul
+                sx={{ listStyle: "none", display: "inline-block", p: 0, m: 0 }}
+              >
+                {post.frontmatter.tags.map((tag) => (
+                  <Styled.li
+                    sx={{ display: "inline-block", ml: 2 }}
+                    key={kebabCase(tag)}
+                  >
+                    <Link href={`/tags/${kebabCase(tag)}`}>{tag}</Link>
+                  </Styled.li>
+                ))}
+              </Styled.ul>
+            </Styled.p>
+          </div>
         )}
         <MDXRenderer>{post.body}</MDXRenderer>
-      </Box>
+      </Container>
     </Layout>
   );
 };

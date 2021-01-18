@@ -1,11 +1,12 @@
-import React from "react";
+/** @jsx jsx */
+import { jsx, Styled } from "theme-ui";
 import { graphql } from "gatsby";
-import { Box, Heading } from "grommet";
 import { kebabCase } from "lodash";
-
-import Layout from "../components/layout";
-import PostLink from "../blocks/PostLink";
 import { Helmet } from "react-helmet";
+
+import Container from "../container";
+import Layout from "../layout";
+import PostLink from "../post-link";
 
 const Template = ({ data, pageContext }) => {
   const { site, posts } = data;
@@ -25,18 +26,12 @@ const Template = ({ data, pageContext }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={pageUrl} />
       </Helmet>
-      <Box
-        direction="column"
-        gap="medium"
-        pad={{ horizontal: "xlarge", vertical: "medium" }}
-      >
-        <Heading size="medium" level={3}>
-          Blog posts tagged with "{tag}"
-        </Heading>
+      <Container>
+        <Styled.h2>Blog posts tagged with "{tag}"</Styled.h2>
         {posts.edges.map(({ node }) => (
           <PostLink key={node.id} post={node} />
         ))}
-      </Box>
+      </Container>
     </Layout>
   );
 };

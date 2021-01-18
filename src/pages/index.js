@@ -1,10 +1,11 @@
-import React from "react";
+/** @jsx jsx */
+import { jsx, Styled } from "theme-ui";
 import { graphql } from "gatsby";
-import { Box, Heading } from "grommet";
 import { Helmet } from "react-helmet";
 
-import Layout from "../components/layout";
-import PostLink from "../blocks/PostLink";
+import Container from "../container";
+import Layout from "../layout";
+import PostLink from "../post-link";
 
 const IndexPage = ({ data }) => {
   const { site, posts } = data;
@@ -23,18 +24,12 @@ const IndexPage = ({ data }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={pageUrl} />
       </Helmet>
-      <Box
-        direction="column"
-        gap="medium"
-        pad={{ horizontal: "xlarge", vertical: "medium" }}
-      >
-        <Heading size="medium" level={1}>
-          Blog posts
-        </Heading>
+      <Container>
+        <Styled.h2>Blog posts</Styled.h2>
         {posts.edges.map(({ node }) => (
           <PostLink key={node.id} post={node} />
         ))}
-      </Box>
+      </Container>
     </Layout>
   );
 };

@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-theme-ui`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,
     `gatsby-plugin-react-helmet`,
@@ -22,14 +22,14 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              aliases: {
-                sh: `bash`,
-              },
-            },
-          },
+          // {
+          //   resolve: `gatsby-remark-prismjs`,
+          //   options: {
+          //     aliases: {
+          //       sh: `bash`,
+          //     },
+          //   },
+          // },
           {
             resolve: `gatsby-remark-images`,
             options: {
