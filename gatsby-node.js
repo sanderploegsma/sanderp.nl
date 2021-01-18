@@ -34,12 +34,18 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
 
-  result.data.posts.edges.forEach(({ node }) => {
+  const posts = result.data.posts.edges;
+  posts.forEach(({ node }, i) => {
+    const previousPost = posts[i - 1] && posts[i - 1].node.id;
+    const nextPost = posts[i + 1] && posts[i + 1].node.id;
+
     createPage({
       path: node.frontmatter.slug || node.slug,
       component: postTemplate,
       context: {
         id: node.id,
+        nextPostId: nextPost,
+        previousPostId: previousPost,
       },
     });
   });

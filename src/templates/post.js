@@ -11,7 +11,7 @@ import Layout from "../layout";
 import Link from "../link";
 
 const Template = ({ data }) => {
-  const { site, post } = data;
+  const { site, post, nextPost, previousPost } = data;
 
   const pageTitle = site.siteMetadata.title
     ? `${post.frontmatter.title} - ${site.siteMetadata.title}`
@@ -59,13 +59,54 @@ const Template = ({ data }) => {
           </div>
         )}
         <MDXRenderer>{post.body}</MDXRenderer>
+        <div
+          sx={{
+            mt: [4, 4, 5],
+            mb: [2, 2, 3],
+            display: "flex",
+            justifyContent: previousPost ? "space-between" : "flex-end",
+          }}
+        >
+          {previousPost && (
+            <div>
+              <Link
+                href={"/" + previousPost.frontmatter.slug || previousPost.slug}
+              >
+                &larr; Newer post
+              </Link>
+              <br />
+              <span sx={{ color: "primary" }}>
+                {previousPost.frontmatter.title}
+              </span>
+            </div>
+          )}
+          {nextPost && (
+            <div sx={{ textAlign: "right" }}>
+              <Link href={"/" + nextPost.frontmatter.slug || nextPost.slug}>
+                Older post &rarr;
+              </Link>
+              <br />
+              <span sx={{ color: "primary" }}>
+                {nextPost.frontmatter.title}
+              </span>
+            </div>
+          )}
+        </div>
       </Container>
     </Layout>
   );
 };
 
 export const pageQuery = graphql`
-  query($id: String!) {
+  fragment PostPagination on Mdx {
+    frontmatter {
+      title
+      slug
+    }
+    slug
+  }
+
+  query($id: String!, $nextPostId: String, $previousPostId: String) {
     site {
       siteMetadata {
         siteUrl
@@ -82,6 +123,12 @@ export const pageQuery = graphql`
       slug
       body
       excerpt(pruneLength: 200)
+    }
+    nextPost: mdx(id: { eq: $nextPostId }) {
+      ...PostPagination
+    }
+    previousPost: mdx(id: { eq: $previousPostId }) {
+      ...PostPagination
     }
   }
 `;
