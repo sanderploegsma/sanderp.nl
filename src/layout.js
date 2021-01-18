@@ -24,7 +24,7 @@ const ThemeToggle = () => {
       sx={{
         p: 0,
         ml: [3, 3, 4],
-        fontSize: [4, 4, 5],
+        fontSize: 4,
         border: "none",
         background: "none",
         cursor: "pointer",
@@ -41,7 +41,7 @@ const IconLink = ({ icon, href }) => (
   <Link
     sx={{
       ml: [3, 3, 4],
-      fontSize: [4, 4, 5],
+      fontSize: 4,
     }}
     href={href}
   >
