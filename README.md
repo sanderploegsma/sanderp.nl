@@ -1,3 +1,4 @@
-My personal website, built with [Gatsby.js](https://gatsbyjs.com).
+# Personal Website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f933fb0d-bd69-4440-85ce-759efaa1da40/deploy-status)](https://app.netlify.com/sites/sanderploegsma/deploys)
+Built using [Gatsby.js](https://gatsbyjs.com) and [Theme-UI](https://theme-ui.com).  
+Hosted on [Netlify](https://netlify.com).  
