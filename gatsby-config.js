@@ -22,14 +22,6 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         gatsbyRemarkPlugins: [
-          // {
-          //   resolve: `gatsby-remark-prismjs`,
-          //   options: {
-          //     aliases: {
-          //       sh: `bash`,
-          //     },
-          //   },
-          // },
           {
             resolve: `gatsby-remark-images`,
             options: {
