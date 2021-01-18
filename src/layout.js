@@ -79,19 +79,20 @@ const Header = ({ social }) => (
 const Footer = ({ sourceUrl }) => (
   <div
     sx={{
-      p: [2, 2, 3],
-      pb: [1, 1, 2],
+      px: [2, 2, 3],
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
     }}
   >
     <p>Copyright © {new Date().getFullYear()}</p>
-    {sourceUrl && (
-      <Link href={sourceUrl} sx={{ textDecoration: "none" }}>
-        Source code on <IoLogoGithub />
-      </Link>
-    )}
+    <p sx={{ textAlign: "right" }}>
+      {sourceUrl && (
+        <Link href={sourceUrl} sx={{ textDecoration: "none" }}>
+          Source code on <IoLogoGithub />
+        </Link>
+      )}
+    </p>
   </div>
 );
 
