@@ -95,6 +95,7 @@ export default {
       my: 3,
       bg: "highlight",
       overflowY: "scroll",
+      maxWidth: "800px",
     },
     code: {
       ...prism,
