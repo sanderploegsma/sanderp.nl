@@ -13,6 +13,7 @@ export const fragment = graphql`
     frontmatter {
       slug
       title
+      description
       date
       tags
     }
@@ -29,7 +30,7 @@ export default ({ post }) => (
         {post.frontmatter.title}
       </Link>
     </Styled.h2>
-    <Styled.p sx={{ mt: 2 }}>{post.excerpt}</Styled.p>
+    <Styled.p>{post.frontmatter.description || post.excerpt}</Styled.p>
     <Link href={`/${post.frontmatter.slug || post.slug}`}>Read more...</Link>
     <Styled.hr sx={{ mt: 4, mb: 4 }} />
   </div>
