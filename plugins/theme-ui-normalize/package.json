@@ -5,7 +5,7 @@
   "description": "Apply normalize.css to a Gatsby site using theme-ui",
   "author": "Sander Ploegsma",
   "scripts": {
-    "prepare": "node ./scripts/install.js"
+    "postinstall": "node ./scripts/fetch.js"
   },
   "dependencies": {
     "gatsby": "^2.26.1",

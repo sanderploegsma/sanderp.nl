@@ -1,9 +1,14 @@
 import React from "react";
-import Normalize from "./normalize.js";
+import { Global, css } from "@emotion/core";
+import normalize from "./normalize";
 
 const Root = ({ children }) => (
   <>
-    <Normalize />
+    <Global
+      styles={css`
+        ${normalize}
+      `}
+    />
     {children}
   </>
 );

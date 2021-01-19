@@ -21,12 +21,11 @@ const cleanedContent = normalizeContent
   .replace(/\s+$/gm, "");
 
 const resultContent = `
-import React from "react";
-import { Global, css } from "@emotion/core";
+import { css } from "@emotion/core";
 
-export default () => (
-    <Global styles={css\`${cleanedContent}\`} />
-);
+export default css\`
+${cleanedContent}
+\`;
 `;
 
 fs.writeFileSync(
