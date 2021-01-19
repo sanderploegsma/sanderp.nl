@@ -1,0 +1,35 @@
+/**
+ * Based on https://github.com/sergeysova/styled-normalize/blob/master/bin/fetch.js
+ */
+const fs = require("fs");
+const path = require("path");
+
+const cleanRegexp = /\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm;
+
+const normalizePackage = JSON.parse(
+  fs.readFileSync("./node_modules/normalize.css/package.json", "utf8")
+);
+const normalizeMain = path.join(
+  "./node_modules/normalize.css",
+  normalizePackage.main
+);
+const normalizeContent = fs.readFileSync(normalizeMain, "utf8");
+
+const cleanedContent = normalizeContent
+  .replace(cleanRegexp, "")
+  .replace(/^\s*\n/gm, "")
+  .replace(/\s+$/gm, "");
+
+const resultContent = `
+import React from "react";
+import { Global, css } from "@emotion/core";
+
+export default () => (
+    <Global styles={css\`${cleanedContent}\`} />
+);
+`;
+
+fs.writeFileSync(
+  path.resolve(__dirname, "..", "src", "normalize.js"),
+  resultContent.trimStart()
+);
