@@ -14,7 +14,6 @@ module.exports = {
     },
   },
   plugins: [
-    `theme-ui-normalize`,
     `gatsby-plugin-theme-ui`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,
