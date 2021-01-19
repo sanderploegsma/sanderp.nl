@@ -20,6 +20,11 @@ const Template = ({ data }) => {
 
   const slug = post.frontmatter.slug || post.slug;
   const pageUrl = `${site.siteMetadata.siteUrl}/${slug}`;
+  const description = post.frontmatter.description || post.excerpt;
+  const seoImage =
+    post.frontmatter.seo &&
+    post.frontmatter.seo.image &&
+    site.siteMetadata.siteUrl + post.frontmatter.seo.image.publicURL;
 
   return (
     <Layout>
@@ -28,12 +33,13 @@ const Template = ({ data }) => {
         <title>{pageTitle}</title>
         <link rel="canonical" href={pageUrl} />
         <meta charSet="utf-8" />
-        <meta property="description" content={post.excerpt} />
+        <meta property="description" content={description} />
         <meta property="keywords" content={post.frontmatter.tags.join(", ")} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:type" content="blog" />
-        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:description" content={description} />
         <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={seoImage} />
       </Helmet>
       <Container>
         <Styled.h2 sx={{ mb: 0 }}>{post.frontmatter.title}</Styled.h2>
@@ -118,9 +124,15 @@ export const pageQuery = graphql`
     post: mdx(id: { eq: $id }) {
       frontmatter {
         title
+        description
         date
         tags
         slug
+        seo {
+          image {
+            publicURL
+          }
+        }
       }
       slug
       body

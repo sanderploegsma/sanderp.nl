@@ -1,0 +1,167 @@
+---
+title: "Advent of Code 2020: Having fun with F#"
+description: They promised me fun and profit when using F#. I have to say, they were right.
+date: 2021-01-19
+tags:
+  - Programming Challenges
+  - Functional Programming
+seo:
+  image: ./i-heart-fsharp-round.png
+---
+
+The last month of each year is always a special one.
+As some might be familiar with the concept of an [advent calendar](https://en.wikipedia.org/wiki/Advent_calendar),
+there is a special competition starting each year on December 1<sup>st</sup>: [Advent of Code](https://adventofcode.com).
+Counting down each day until Christmas, you are sent off on an adventure that requires you to solve a series of puzzles.
+Each day a new challenge is unlocked, and each challenge consists of two parts.
+Solving a challenge successfully yields you _gold stars_, and obtaining the total of 50 gold stars usually means you have saved Christmas.
+
+Each event also comes with its own _leaderboard_: You score points based on the time it takes you to complete a challenge.
+Ending up on this leaderboard is notoriously hard though: only the top 100 receives any points at all.
+However, for many of us (including myself), being able to complete all puzzles as they unlock is enough of a challenge.
+It's a good way to brush up on your problem solving skills, knowledge of algorithms, or just to practice coding in a new programming language.
+
+## Falling in love with F#
+
+Advent of Code 2020 was the second time I actively participated (using previous years for practicing purposes) and after using Go the year before I wanted to try something different this time.
+
+In the previous years I have encountered several people - shout out to [Devon Burriss](https://devonburriss.me) - who were praising F# for its ability to correctly model domains and allow you to build type-safe and correct programs in a functional and concise manner.
+Inspired by their enthousiasm and plenty of online advocates for F# I decided it was time to put my functional programming skills to the test and do this year in F#.
+
+It didn't take long for the benefits to start to show: the first thing I fell in love with was the ability to use [discriminated unions](https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/discriminated-unions) to model the puzzle input.
+Representing your domain model in a strict type system is a great way to reduce complexity in your code, because it makes it impossible to reach invalid states and reduces the amount of [defensive programming](https://enterprisecraftsmanship.com/posts/defensive-programming/) needed.
+
+Secondly, having used functional programming concepts in other programming languages for years I couldn't help but notice that, instead of being bolted on using libraries (like `LanguageExtensions` for C# and `Vavr` for Java), F# immediately felt _right_.
+The syntax is very concise and the ability to "pipe" variables into a function makes a set of function applications much more readable compared to other languages. Consider this Java implementation compared to the F# equivalent below:
+
+```java
+public String transform(String input) {
+  return validate(stripLeadingZeroes(toTitleCase(input)));
+}
+```
+
+```fsharp
+let transform input =
+  input |> toTitleCase |> stripLeadingZeroes |> validate
+```
+
+The biggest difference in my opinion is that the F# example reads left-to-right, whereas the Java example needs to be read right-to-left.
+This can of course be solved by using local variables, but that clutters it even further.
+
+Finally, I am a big fan of self-documenting code, and over the years I have come to realize that this is much easier to achieve if the signal-to-noise ratio is as high as possible.
+By combining functional programming and F# I feel like there is almost no need to write _how_ something needs to be done, just _what_ has to be done.
+That, in my opinion is the way to code for today, while being able to come back to it in the future.
+
+## Solving programming challenges in F#
+
+Here is an example to illustrate the power of F# when doing programming challenges.
+
+Suppose you are given a list of instructions that either tell you to advance (`A`) `x` steps, or rotate by `y` degrees clockwise (`R`) or counter-clockwise (`L`):
+
+```
+R180
+A10
+L90
+A3
+```
+
+Of course you can write a program that works with the raw instructions, but using F# it's as simple as declaring:
+
+```fsharp
+type Instruction =
+  /// Advance a number of steps
+  | Advance of int
+  /// Rotate 90 degrees clockwise
+  | Rotate
+
+/// Retrieve a list of instructions from the given input string.
+let parseInstruction (instruction: string): Instruction list =
+  match instruction[0], int (instruction.Substring(1)) with
+  | 'A', steps -> [Advance steps]
+
+  // `R180` would result in [Rotate; Rotate]
+  | 'R', degrees -> List.replicate (degrees / 90) Rotate
+
+  // `L90` would result in [Rotate; Rotate; Rotate]
+  | 'L', degrees -> List.replicate ((360 - degrees) / 90) Rotate
+```
+
+Then, suppose I have to follow each instruction starting at `(0, 0)` and a direction `North`,
+I can use the type system to my full advantage:
+
+```fsharp
+type Instruction =
+  /// Advance a number of steps
+  | Advance of int
+  /// Rotate 90 degrees clockwise
+  | Rotate
+
+/// Retrieve a list of instructions from the given input string.
+let parseInstruction (instruction: string): Instruction list =
+  match instruction[0], int (instruction.Substring(1)) with
+  | 'A', steps -> [Advance steps]
+
+  // `R180` would result in [Rotate; Rotate]
+  | 'R', degrees -> List.replicate (degrees / 90) Rotate
+
+  // `L90` would result in [Rotate; Rotate; Rotate]
+  | 'L', degrees -> List.replicate ((360 - degrees) / 90) Rotate
+
+type Position = int * int
+
+type Direction = North | East | South | West
+
+/// Retrieve a new position by moving `n` steps in a given direction from a given position
+let move (n: int) (direction: Direction) ((x, y): Position): Position =
+  match direction with
+  | North -> (x, y + n)
+  | East -> (x + n, y)
+  | South -> (x, y - n)
+  | West -> (x - n, y)
+
+/// Retrieve a new direction by rotating 90 degrees clockwise from a given direction
+let rotate (direction: Direction): Direction =
+  match direction with
+  | North -> East
+  | East -> South
+  | South -> West
+  | West -> North
+
+type State = Position * Direction
+
+/// Retrieve a new state by applying the given instruction to the given state
+let eval ((position, direction): State) (instruction: Instruction): State =
+  match instruction with
+  // When advancing, the position changes and the direction stays the same
+  | Advance steps -> (position |> move steps direction), direction
+
+  // When rotating, the position stays the same and the direction changes
+  | Rotate -> position, (direction |> rotate)
+
+let initialState: State = (0, 0), North
+let finalState =
+  File.ReadAllLines("input.txt")
+  |> Seq.collect parseInstruction
+  |> Seq.fold eval initialState
+
+printfn "Final state: %A" finalState
+// With the example input this would print "Final state: ((3, -10), East)"
+```
+
+By taking the time to model the puzzle input using the F# type system, you end up with code that is easily composed from smaller parts,
+while the full implementation is still easy to follow.
+
+## Closing notes
+
+I had a lot of fun participating in Advent of Code 2020, while simultaneously practicing my F# skills.
+Of course it's not all rainbows and sunshine, there were a couple of puzzles where I had a hard time coming up with a clean way to solve it - I'm looking at you, [Jurassic Jigsaw](https://adventofcode.com/2020/day/20).
+Still, I'll gladly do this again this year.
+
+For those interested, all of my Advent of Code solutions are available on GitHub: [sanderploegsma/advent-of-code](https://github.com/sanderploegsma/advent-of-code).
+
+[![I love F#](./i-heart-fsharp.png)](https://www.dropbox.com/sh/odx680qh5srur2n/AACc8tZ6-eDI09YK0-Y5F4hNa?dl=0)
+
+## Recommended reading
+
+- If you haven't already, I can highly recommend checking out [F# for fun and profit](https://fsharpforfunandprofit.com).
+- The yearly [F# Advent Calendar](https://sergeytihon.com/2020/10/22/f-advent-calendar-in-english-2020/) series contains a lot of blog posts about F#, there's some good stuff in there.

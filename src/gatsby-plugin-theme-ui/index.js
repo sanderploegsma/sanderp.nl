@@ -101,8 +101,8 @@ export default {
     },
     inlineCode: {
       fontFamily: "monospace",
-      color: "secondary",
-      fontSize: "87.5%",
+      color: "primary",
+      fontSize: "90%",
     },
     ul: {
       pl: 3,
