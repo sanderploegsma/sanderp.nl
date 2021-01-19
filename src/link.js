@@ -11,6 +11,8 @@ export const Link = ({ href, ...props }) =>
     <a
       {...props}
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       sx={{
         color: "inherit",
         "&.active": {
