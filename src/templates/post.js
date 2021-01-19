@@ -43,7 +43,7 @@ const Template = ({ data }) => {
       </Helmet>
       <Container>
         <Styled.h2 sx={{ mb: 0 }}>{post.frontmatter.title}</Styled.h2>
-        <Styled.p sx={{ marginBlockStart: 0, color: "primary" }}>
+        <Styled.p sx={{ variant: "text.emphasis.low", marginBlockStart: 0 }}>
           Published <FormattedDate date={post.frontmatter.date} />
         </Styled.p>
         {post.frontmatter.tags && (

@@ -29,6 +29,9 @@ const ThemeToggle = () => {
         background: "none",
         cursor: "pointer",
         color: "text",
+        "&:hover": {
+          color: "secondary",
+        },
       }}
       onClick={toggle}
     >
@@ -56,7 +59,7 @@ const Header = ({ social }) => (
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      bg: "highlight",
+      bg: "muted",
     }}
   >
     <Styled.h3>

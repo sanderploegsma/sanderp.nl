@@ -1,19 +1,21 @@
 import prism from "@theme-ui/prism/presets/theme-ui";
+import { alpha } from "@theme-ui/color";
 
 export default {
+  useColorSchemeMediaQuery: true,
   colors: {
-    background: "#eee",
-    highlight: "#f9f7f7",
-    text: "#112d4e",
-    light: "#dbe2ef",
-    primary: "#3f72af",
+    background: "#f6f8fa",
+    muted: "#ffffff",
+    text: "#24292e",
+    primary: "#f2851c",
+    secondary: "#e21635",
     modes: {
       dark: {
-        background: "#111",
-        highlight: "#222831",
-        text: "#ececec",
-        light: "#30475e",
-        primary: "#f2a365",
+        background: "#121212",
+        muted: "#272727",
+        text: "#ffffff",
+        primary: "#ffe4a4",
+        secondary: "#fdbf6e",
       },
     },
   },
@@ -28,11 +30,24 @@ export default {
     body: 1.75,
     heading: 1.25,
   },
+  text: {
+    emphasis: {
+      low: {
+        color: alpha("text", 0.6),
+      },
+      high: {
+        color: alpha("text", 0.87),
+      },
+    },
+    disabled: {
+      color: alpha("text", 0.38),
+    },
+  },
   styles: {
     root: {
       fontFamily: "body",
       lineHeight: "body",
-      backgroundColor: "background",
+      bg: "background",
     },
     a: {
       color: "primary",
@@ -93,16 +108,16 @@ export default {
       fontSize: 1,
       p: 3,
       my: 3,
-      bg: "highlight",
       overflowY: "scroll",
       maxWidth: "800px",
+      bg: "muted",
     },
     code: {
       ...prism,
     },
     inlineCode: {
-      fontFamily: "monospace",
-      color: "primary",
+      fontFamily: "Menlo, monospace",
+      color: "secondary",
       fontSize: "90%",
     },
     ul: {

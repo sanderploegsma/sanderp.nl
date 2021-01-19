@@ -22,7 +22,7 @@ export const fragment = graphql`
 
 export default ({ post }) => (
   <div>
-    <Styled.p sx={{ marginBlockEnd: 0 }}>
+    <Styled.p sx={{ variant: "text.emphasis.low", marginBlockEnd: 0 }}>
       Published <FormattedDate date={post.frontmatter.date} />
     </Styled.p>
     <Styled.h2 sx={{ color: "primary", mt: 0 }}>
@@ -30,7 +30,9 @@ export default ({ post }) => (
         {post.frontmatter.title}
       </Link>
     </Styled.h2>
-    <Styled.p>{post.frontmatter.description || post.excerpt}</Styled.p>
+    <Styled.p sx={{ variant: "text.emphasis.high" }}>
+      {post.frontmatter.description || post.excerpt}
+    </Styled.p>
     <Link href={`/${post.frontmatter.slug || post.slug}`}>Read more...</Link>
     <Styled.hr sx={{ mt: 4, mb: 4 }} />
   </div>

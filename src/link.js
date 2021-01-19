@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui";
+import { jsx, Styled } from "theme-ui";
 import { Link as GatsbyLink } from "gatsby";
 import isAbsoluteURL from "is-absolute-url";
 
@@ -8,7 +8,7 @@ const isHash = (str) => /^#/.test(str);
 export const Link = ({ href, ...props }) =>
   isHash(href) || isAbsoluteURL(href) ? (
     // eslint-disable-next-line
-    <a
+    <Styled.a
       {...props}
       href={href}
       target="_blank"
