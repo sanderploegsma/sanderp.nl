@@ -8,7 +8,7 @@ const Container = ({ sx, ...props }) => (
       ...sx,
       mx: "auto",
       px: [2, 3],
-      maxWidth: [800, 960],
+      maxWidth: ["100%", "100%", 680, 960, 1200],
     }}
   />
 );

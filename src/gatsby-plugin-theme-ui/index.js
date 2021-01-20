@@ -21,7 +21,7 @@ export default {
       },
     },
   },
-  breakpoints: ["40em", "52em", "64em"],
+  breakpoints: ["479px", "768px", "992px", "1280px", "1440px", "1920px"],
   space: [0, 4, 8, 16, 32, 64, 128],
   fonts: {
     body: "system-ui, sans-serif",
@@ -110,8 +110,8 @@ export default {
       fontSize: 1,
       p: 3,
       my: 3,
-      overflowY: "scroll",
       bg: "muted",
+      overflowX: "auto",
     },
     code: {
       ...prism,
