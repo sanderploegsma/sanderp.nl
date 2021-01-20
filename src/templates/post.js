@@ -51,7 +51,9 @@ const Template = ({ data }) => {
         >
           {formatDate(post.frontmatter.date)} &mdash; {post.timeToRead} min read
         </Styled.p>
-        <Styled.h1 sx={{ mt: 0 }}>{post.frontmatter.title}</Styled.h1>
+        <Styled.h1 sx={{ mt: 0, color: "primary" }}>
+          {post.frontmatter.title}
+        </Styled.h1>
         {post.frontmatter.tags && (
           <Tags
             tags={post.frontmatter.tags}
