@@ -111,7 +111,6 @@ export default {
       p: 3,
       my: 3,
       overflowY: "scroll",
-      maxWidth: "800px",
       bg: "muted",
     },
     code: {
