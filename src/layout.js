@@ -11,6 +11,7 @@ import {
 } from "react-icons/io5";
 
 import Link from "./link";
+import Container from "./container";
 
 const ThemeToggle = () => {
   const [colorMode, setColorMode] = useColorMode();
@@ -53,49 +54,55 @@ const IconLink = ({ icon, href }) => (
 );
 
 const Header = ({ social }) => (
-  <div
-    sx={{
-      p: [2, 2, 3],
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      bg: "muted",
-    }}
-  >
-    <Styled.h3>
-      <Link href="/">Sander Ploegsma</Link>
-    </Styled.h3>
-    <div
-      sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}
+  <div sx={{ bg: "muted" }}>
+    <Container
+      sx={{
+        // py: [2, 2, 3],
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
     >
-      {social.github && (
-        <IconLink href={social.github} icon={<IoLogoGithub />} />
-      )}
-      {social.linkedin && (
-        <IconLink href={social.linkedin} icon={<IoLogoLinkedin />} />
-      )}
-      <ThemeToggle />
-    </div>
+      <Styled.h3 sx={{ fontSize: [3, 4] }}>
+        <Link href="/">Sander Ploegsma</Link>
+      </Styled.h3>
+      <div
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
+        {social.github && (
+          <IconLink href={social.github} icon={<IoLogoGithub />} />
+        )}
+        {social.linkedin && (
+          <IconLink href={social.linkedin} icon={<IoLogoLinkedin />} />
+        )}
+        <ThemeToggle />
+      </div>
+    </Container>
   </div>
 );
 
 const Footer = ({ sourceUrl }) => (
-  <div
-    sx={{
-      px: [2, 2, 3],
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-    }}
-  >
-    <p>Copyright © {new Date().getFullYear()}</p>
-    <p sx={{ textAlign: "right" }}>
-      {sourceUrl && (
-        <Link href={sourceUrl} sx={{ textDecoration: "none" }}>
-          Source code on <IoLogoGithub />
-        </Link>
-      )}
-    </p>
+  <div>
+    <Container
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <p>Copyright © {new Date().getFullYear()}</p>
+      <p sx={{ textAlign: "right" }}>
+        {sourceUrl && (
+          <Link href={sourceUrl} sx={{ textDecoration: "none" }}>
+            Source code on <IoLogoGithub />
+          </Link>
+        )}
+      </p>
+    </Container>
   </div>
 );
 
@@ -117,7 +124,7 @@ export default ({ children }) => {
   return (
     <>
       <Header {...data.site.siteMetadata} />
-      <main sx={{ p: [2, 2, 3] }}>{children}</main>
+      <main>{children}</main>
       <Footer {...data.site.siteMetadata} />
     </>
   );

@@ -7,7 +7,8 @@ const Container = ({ sx, ...props }) => (
     sx={{
       ...sx,
       mx: "auto",
-      maxWidth: 800,
+      px: [2, 3],
+      maxWidth: [800, 960],
     }}
   />
 );
