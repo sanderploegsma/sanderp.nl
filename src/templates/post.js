@@ -18,8 +18,7 @@ const Template = ({ data }) => {
     ? `${post.frontmatter.title} - ${site.siteMetadata.title}`
     : post.frontmatter.title;
 
-  const slug = post.frontmatter.slug || post.slug;
-  const pageUrl = `${site.siteMetadata.siteUrl}/${slug}`;
+  const pageUrl = site.siteMetadata.siteUrl + postRoute(post);
   const description = post.frontmatter.description || post.excerpt;
   const seoImage =
     post.frontmatter.seo &&

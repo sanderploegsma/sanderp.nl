@@ -1,19 +1,19 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui";
 import { graphql } from "gatsby";
-import { kebabCase } from "lodash";
 import { Helmet } from "react-helmet";
 
 import Container from "../container";
 import Layout from "../layout";
 import PostLink from "../post-link";
+import { tagRoute } from "../routes";
 
 const Template = ({ data, pageContext }) => {
   const { site, posts } = data;
   const { tag } = pageContext;
 
   const pageTitle = `Posts tagged with "${tag}" - ${site.siteMetadata.title}`;
-  const pageUrl = `${site.siteMetadata.siteUrl}/tags/${kebabCase(tag)}`;
+  const pageUrl = site.siteMetadata.siteUrl + tagRoute(tag);
 
   return (
     <Layout>
