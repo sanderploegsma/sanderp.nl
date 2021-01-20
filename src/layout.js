@@ -3,12 +3,7 @@
 import React from "react";
 import { jsx, useColorMode, Styled } from "theme-ui";
 import { graphql, useStaticQuery } from "gatsby";
-import {
-  IoSunnySharp,
-  IoMoonSharp,
-  IoLogoGithub,
-  IoLogoLinkedin,
-} from "react-icons/io5";
+import { IoSunnySharp, IoMoonSharp, IoLogoGithub } from "react-icons/io5";
 
 import Link from "./link";
 import Container from "./container";
@@ -41,19 +36,7 @@ const ThemeToggle = () => {
   );
 };
 
-const IconLink = ({ icon, href }) => (
-  <Link
-    sx={{
-      ml: [3, 3, 4],
-      fontSize: 4,
-    }}
-    href={href}
-  >
-    {icon}
-  </Link>
-);
-
-const Header = ({ social }) => (
+const Header = () => (
   <div sx={{ bg: "muted" }}>
     <Container
       sx={{
@@ -73,12 +56,6 @@ const Header = ({ social }) => (
           justifyContent: "flex-end",
         }}
       >
-        {social.github && (
-          <IconLink href={social.github} icon={<IoLogoGithub />} />
-        )}
-        {social.linkedin && (
-          <IconLink href={social.linkedin} icon={<IoLogoLinkedin />} />
-        )}
         <ThemeToggle />
       </div>
     </Container>
@@ -112,10 +89,6 @@ export default ({ children }) => {
       site {
         siteMetadata {
           sourceUrl
-          social {
-            github
-            linkedin
-          }
         }
       }
     }
