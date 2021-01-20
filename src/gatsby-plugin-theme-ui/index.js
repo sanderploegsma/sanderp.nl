@@ -32,6 +32,11 @@ export default {
     body: 1.75,
     heading: 1.25,
   },
+  container: {
+    content: {
+      mt: [3, 3, 5],
+    },
+  },
   text: {
     condensed: {
       marginBlockStart: 2,

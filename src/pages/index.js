@@ -26,8 +26,7 @@ const IndexPage = ({ data }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={siteUrl} />
       </Helmet>
-      <Container>
-        <Styled.h2>About me</Styled.h2>
+      <Container sx={{ variant: "container.content" }}>
         <AboutMe />
         <Styled.h2>Blog posts</Styled.h2>
         {posts.edges.map(({ node }) => (

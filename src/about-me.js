@@ -112,16 +112,18 @@ export default ({ short }) => {
       <Flex
         sx={{
           ml: [0, 0, 4],
+          mt: [2, 2, 0],
           flexDirection: "column",
           flex: "1",
         }}
       >
+        <Styled.h2 sx={{ variant: "text.condensed" }}>About me</Styled.h2>
         {short ? <DescriptionShort /> : <DescriptionFull />}
         <Styled.ul
           sx={{
             listStyle: "none",
             p: 0,
-            mt: 0,
+            mt: [2, 2, 3],
             alignSelf: ["center", "center", "flex-start"],
           }}
         >

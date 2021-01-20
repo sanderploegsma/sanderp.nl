@@ -79,7 +79,7 @@ const Template = ({ data }) => {
         <meta property="og:url" content={pageUrl} />
         <meta property="og:image" content={seoImage} />
       </Helmet>
-      <Container sx={{ pt: [3, 3, 5] }}>
+      <Container sx={{ variant: "container.content" }}>
         <Styled.p
           sx={{
             variant: "text.emphasis.low",
