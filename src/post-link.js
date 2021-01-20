@@ -2,8 +2,9 @@
 import { jsx, Styled } from "theme-ui";
 import { graphql } from "gatsby";
 
-import { formatDate } from "./date";
 import Link from "./link";
+import Tags from "./tags";
+import { formatDate } from "./date";
 import { postRoute } from "./routes";
 
 export const fragment = graphql`
@@ -23,16 +24,24 @@ export const fragment = graphql`
 
 export default ({ post }) => (
   <div>
-    <Styled.p sx={{ variant: "text.emphasis.low", marginBlockEnd: 0 }}>
+    <Styled.p
+      sx={{
+        variant: "text.emphasis.low",
+        marginBlockEnd: 0,
+        fontSize: [1, 2, 3],
+      }}
+    >
       {formatDate(post.frontmatter.date)} &mdash; {post.timeToRead} min read
     </Styled.p>
-    <Styled.h2 sx={{ color: "primary", mt: 0 }}>
+    <Styled.h2 sx={{ color: "primary", mt: 0, mb: [1, 2] }}>
       <Link href={postRoute(post)}>{post.frontmatter.title}</Link>
     </Styled.h2>
-    <Styled.p sx={{ variant: "text.emphasis.high" }}>
+    <Styled.p sx={{ variant: "text.emphasis.high", marginBlockStart: [1, 2] }}>
       {post.frontmatter.description || post.excerpt}
     </Styled.p>
-    <Link href={postRoute(post)}>Read more...</Link>
-    <Styled.hr sx={{ mt: 4, mb: 4 }} />
+    {post.frontmatter.tags && (
+      <Tags tags={post.frontmatter.tags} sx={{ mt: 3 }} />
+    )}
+    <Styled.hr sx={{ mt: [3, 4], mb: [3, 4] }} />
   </div>
 );

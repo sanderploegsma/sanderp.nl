@@ -7,6 +7,7 @@ export default {
     background: "#f6f8fa",
     muted: "#ffffff",
     text: "#24292e",
+    textInverted: "#24292e",
     primary: "#f2851c",
     secondary: "#e21635",
     modes: {
@@ -14,6 +15,7 @@ export default {
         background: "#121212",
         muted: "#272727",
         text: "#ffffff",
+        textInverted: "#121212",
         primary: "#ffe4a4",
         secondary: "#fdbf6e",
       },

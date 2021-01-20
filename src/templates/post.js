@@ -8,8 +8,9 @@ import Comments from "../comments";
 import Container from "../container";
 import Layout from "../layout";
 import Link from "../link";
+import Tags from "../tags";
 import { formatDate } from "../date";
-import { postRoute, tagRoute } from "../routes";
+import { postRoute } from "../routes";
 
 const Template = ({ data }) => {
   const { site, post, nextPost, previousPost } = data;
@@ -41,25 +42,21 @@ const Template = ({ data }) => {
         <meta property="og:image" content={seoImage} />
       </Helmet>
       <Container>
-        <Styled.p sx={{ variant: "text.emphasis.low", marginBlockEnd: 0 }}>
+        <Styled.p
+          sx={{
+            variant: "text.emphasis.low",
+            marginBlockEnd: 0,
+            fontSize: [1, 2, 3],
+          }}
+        >
           {formatDate(post.frontmatter.date)} &mdash; {post.timeToRead} min read
         </Styled.p>
-        <Styled.h2 sx={{ mt: 0 }}>{post.frontmatter.title}</Styled.h2>
+        <Styled.h1 sx={{ mt: 0 }}>{post.frontmatter.title}</Styled.h1>
         {post.frontmatter.tags && (
-          <div>
-            <Styled.p>
-              Tags:
-              <Styled.ul
-                sx={{ listStyle: "none", display: "inline-block", p: 0, m: 0 }}
-              >
-                {post.frontmatter.tags.map((tag) => (
-                  <Styled.li sx={{ display: "inline-block", ml: 2 }} key={tag}>
-                    <Link href={tagRoute(tag)}>{tag}</Link>
-                  </Styled.li>
-                ))}
-              </Styled.ul>
-            </Styled.p>
-          </div>
+          <Tags
+            tags={post.frontmatter.tags}
+            sx={{ mt: [0, "-12px"], mb: [4, 4, 5] }}
+          />
         )}
         <MDXRenderer>{post.body}</MDXRenderer>
         <div
