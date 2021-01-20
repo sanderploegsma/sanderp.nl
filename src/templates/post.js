@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx, Styled } from "theme-ui";
+import { jsx, Styled, Divider } from "theme-ui";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Helmet } from "react-helmet";
 
+import AboutMe from "../about-me";
 import Comments from "../comments";
 import Container from "../container";
 import Layout from "../layout";
@@ -11,6 +12,43 @@ import Link from "../link";
 import Tags from "../tags";
 import { formatDate } from "../date";
 import { postRoute } from "../routes";
+
+const PostStepper = ({ href, postTitle, children, ...props }) => (
+  <div {...props}>
+    <Link href={href}>{children}</Link>
+    <br />
+    <span sx={{ color: "primary" }}>{postTitle}</span>
+  </div>
+);
+
+const PostPagination = ({ newerPost, olderPost }) => (
+  <div
+    sx={{
+      mt: [4, 4, 5],
+      mb: [2, 2, 3],
+      display: "flex",
+      justifyContent: newerPost ? "space-between" : "flex-end",
+    }}
+  >
+    {newerPost && (
+      <PostStepper
+        href={postRoute(newerPost)}
+        postTitle={newerPost.frontmatter.title}
+      >
+        &larr; Newer post
+      </PostStepper>
+    )}
+    {olderPost && (
+      <PostStepper
+        href={postRoute(olderPost)}
+        postTitle={olderPost.frontmatter.title}
+        sx={{ textAlign: "right" }}
+      >
+        Older post &rarr;
+      </PostStepper>
+    )}
+  </div>
+);
 
 const Template = ({ data }) => {
   const { site, post, nextPost, previousPost } = data;
@@ -41,7 +79,7 @@ const Template = ({ data }) => {
         <meta property="og:url" content={pageUrl} />
         <meta property="og:image" content={seoImage} />
       </Helmet>
-      <Container>
+      <Container sx={{ pt: [3, 3, 5] }}>
         <Styled.p
           sx={{
             variant: "text.emphasis.low",
@@ -55,39 +93,12 @@ const Template = ({ data }) => {
           {post.frontmatter.title}
         </Styled.h1>
         {post.frontmatter.tags && (
-          <Tags
-            tags={post.frontmatter.tags}
-            sx={{ mt: [0, "-12px"], mb: [4, 4, 5] }}
-          />
+          <Tags tags={post.frontmatter.tags} sx={{ mt: [0, "-12px"], mb: 4 }} />
         )}
         <MDXRenderer>{post.body}</MDXRenderer>
-        <div
-          sx={{
-            mt: [4, 4, 5],
-            mb: [2, 2, 3],
-            display: "flex",
-            justifyContent: previousPost ? "space-between" : "flex-end",
-          }}
-        >
-          {previousPost && (
-            <div>
-              <Link href={postRoute(previousPost)}>&larr; Newer post</Link>
-              <br />
-              <span sx={{ color: "primary" }}>
-                {previousPost.frontmatter.title}
-              </span>
-            </div>
-          )}
-          {nextPost && (
-            <div sx={{ textAlign: "right" }}>
-              <Link href={postRoute(nextPost)}>Older post &rarr;</Link>
-              <br />
-              <span sx={{ color: "primary" }}>
-                {nextPost.frontmatter.title}
-              </span>
-            </div>
-          )}
-        </div>
+        <Divider my={4} />
+        <AboutMe short />
+        <PostPagination newerPost={previousPost} olderPost={nextPost} />
         <Comments sx={{ mt: 4 }} />
       </Container>
     </Layout>

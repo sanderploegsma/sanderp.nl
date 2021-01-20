@@ -33,6 +33,9 @@ export default {
     heading: 1.25,
   },
   text: {
+    condensed: {
+      marginBlock: 2,
+    },
     emphasis: {
       low: {
         color: alpha("text", 0.6),
@@ -43,6 +46,18 @@ export default {
     },
     disabled: {
       color: alpha("text", 0.38),
+    },
+  },
+  images: {
+    avatar: {
+      width: [150, 180],
+      height: [150, 180],
+      borderRadius: 9999,
+    },
+    avatarSmall: {
+      width: [100, 120],
+      height: [100, 120],
+      borderRadius: 9999,
     },
   },
   styles: {

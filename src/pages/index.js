@@ -3,6 +3,7 @@ import { jsx, Styled } from "theme-ui";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 
+import AboutMe from "../about-me";
 import Container from "../container";
 import Layout from "../layout";
 import PostLink from "../post-link";
@@ -25,6 +26,8 @@ const IndexPage = ({ data }) => {
         <meta property="og:url" content={pageUrl} />
       </Helmet>
       <Container>
+        <Styled.h2>About me</Styled.h2>
+        <AboutMe />
         <Styled.h2>Blog posts</Styled.h2>
         {posts.edges.map(({ node }) => (
           <PostLink key={node.id} post={node} />

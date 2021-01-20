@@ -11,6 +11,10 @@ module.exports = {
     social: {
       github: "https://github.com/sanderploegsma",
       linkedin: "https://linkedin.com/in/sanderploegsma",
+      playstation: "https://my.playstation.com/profile/sanderploegsma",
+      spotify:
+        "https://open.spotify.com/user/sanderploegsma?si=WX2J8F6ARwyy7s5LbiItzw",
+      stackoverflow: "https://stackoverflow.com/users/1595197/sander",
     },
   },
   plugins: [
