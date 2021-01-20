@@ -1,5 +1,6 @@
 ---
-title: Debugging Golang concurrency issues
+title: Debugging Go concurrency issues
+description: 'Today I Learned: Go has a built-in "race detector" which helps you catch race conditions in production code. The Go toolchain really is awesome!'
 date: 2017-09-14
 slug: debugging-golang-concurrency-issues-c979c588f9ea
 tags:
@@ -9,7 +10,7 @@ tags:
 
 ![A gopher](./gopher.png)
 
-Recently I’ve been working on a Golang application that uses Google Cloud Pub/Sub to migrate large amounts of Google Cloud Datastore entities efficiently and resiliently.
+Recently I’ve been working on a Go application that uses Google Cloud Pub/Sub to migrate large amounts of Google Cloud Datastore entities efficiently and resiliently.
 Basically, a master process queries entities and publishes them to a Pub/Sub topic, ready to be consumed by multiple workers.
 
 To make sure the Pub/Sub topic and subscription are cleaned up afterwards, I made sure the master waits until all entities are processed before cleaning up and exiting.
@@ -71,7 +72,7 @@ FAIL
 FAIL app/test 20.607s
 ```
 
-Looking at the code I realised that I made the exact same mistake they showed in Golang’s own blog post on race detection:
+Looking at the code I realised that I made the exact same mistake they showed in Go's own [blog post on race detection](https://blog.golang.org/race-detector):
 I was reading and writing the `lastMessageTimestamp` in two different goroutines. Luckily for me, the fix used in the blog post was just as usable for me.
 Using the code below the race detector was happy and my random failures disappeared.
 
@@ -105,4 +106,4 @@ func (m *master) waitUntilQueueEmpty(ctx context.Context, sub *pubsub.Subscripti
 
 So if you haven’t already, just try running your app or tests using the `-race` flag. Who knows, you might find that nasty bug you’ve been debugging for days!
 
-This post was originally [published on Medium](https://medium.com/@sanderp91/debugging-golang-concurrency-issues-c979c588f9ea)
+This post was originally [published on Medium](https://medium.com/@sanderp91/debugging-golang-concurrency-issues-c979c588f9ea).

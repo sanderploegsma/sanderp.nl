@@ -1,5 +1,6 @@
 ---
 title: Running Redis Cluster on Kubernetes
+description: "If a single-node Redis is not enough for your scaling needs, consider using Redis Cluster. Note: this guide is probably outdated."
 date: 2017-05-30
 slug: running-redis-cluster-on-kubernetes-e451bda76cad
 tags:
@@ -137,4 +138,4 @@ These steps are documented [in the example](https://github.com/sanderploegsma/re
 - Update (2018–08–22): as some people pointed out in the comments, the cluster breaks when one of the nodes is restarted and gets a new IP address assigned. I updated the post with a script that should fix this.
 - Update (2018–08–22): [@riaan53](https://github.com/riaan53) pointed out that the cluster commands previously handled by `redis-trib` will become part of the official `redis-cli` in Redis 5.0. I updated the example to use the latest 5.0 RC instead of a custom image.
 
-This post was originally [published on Medium](https://medium.com/@sanderp91/running-redis-cluster-on-kubernetes-e451bda76cad)
+This post was originally [published on Medium](https://medium.com/@sanderp91/running-redis-cluster-on-kubernetes-e451bda76cad).
