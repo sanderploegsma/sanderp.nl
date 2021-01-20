@@ -111,6 +111,7 @@ export default {
       p: 3,
       my: 3,
       bg: "muted",
+      overflowX: "auto",
     },
     code: {
       ...prism,
