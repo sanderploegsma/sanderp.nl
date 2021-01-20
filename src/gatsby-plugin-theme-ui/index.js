@@ -34,7 +34,8 @@ export default {
   },
   text: {
     condensed: {
-      marginBlock: 2,
+      marginBlockStart: 2,
+      marginBlockEnd: 2,
     },
     emphasis: {
       low: {
