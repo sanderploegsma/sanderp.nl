@@ -11,19 +11,20 @@ import PostLink from "../post-link";
 const IndexPage = ({ data }) => {
   const { site, posts } = data;
 
-  const pageTitle = site.siteMetadata.title;
-  const pageUrl = site.siteMetadata.siteUrl;
+  const { title, description, siteUrl } = site.siteMetadata;
 
   return (
     <Layout>
       <Helmet>
         <html lang="en" />
         <meta charSet="utf-8" />
-        <title>{pageTitle}</title>
-        <link rel="canonical" href={pageUrl} />
-        <meta property="og:title" content={pageTitle} />
+        <title>{title}</title>
+        <link rel="canonical" href={siteUrl} />
+        <meta property="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={pageUrl} />
+        <meta property="og:url" content={siteUrl} />
       </Helmet>
       <Container>
         <Styled.h2>About me</Styled.h2>
@@ -42,6 +43,7 @@ export const query = graphql`
     site {
       siteMetadata {
         title
+        description
         siteUrl
       }
     }

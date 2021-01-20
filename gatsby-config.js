@@ -6,6 +6,8 @@ const { REPOSITORY_URL, URL } = process.env;
 module.exports = {
   siteMetadata: {
     title: "Sander Ploegsma",
+    description:
+      "I like functional programming, code puzzles, cloud stuff and high-tech products.",
     siteUrl: URL || "https://sanderp.nl",
     sourceUrl: REPOSITORY_URL || "https://github.com/sanderploegsma/sanderp.nl",
     social: {
