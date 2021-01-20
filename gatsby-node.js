@@ -1,4 +1,12 @@
-const { kebabCase } = require("lodash");
+const { postRoute, tagRoute } = require("./src/routes");
+
+const trimPrefix = (str, prefix) => {
+  if (str.startsWith(prefix)) {
+    return str.slice(prefix.length);
+  }
+
+  return str;
+};
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
@@ -40,7 +48,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const nextPost = posts[i + 1] && posts[i + 1].node.id;
 
     createPage({
-      path: node.frontmatter.slug || node.slug,
+      path: trimPrefix(postRoute(node), "/"),
       component: postTemplate,
       context: {
         id: node.id,
@@ -52,7 +60,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   result.data.tags.group.forEach(({ tag }) => {
     createPage({
-      path: `tags/${kebabCase(tag)}/`,
+      path: trimPrefix(tagRoute(tag), "/"),
       component: tagTemplate,
       context: {
         tag,

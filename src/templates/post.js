@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui";
 import { graphql } from "gatsby";
-import { kebabCase } from "lodash";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Helmet } from "react-helmet";
 
@@ -10,6 +9,7 @@ import Container from "../container";
 import Layout from "../layout";
 import Link from "../link";
 import { formatDate } from "../date";
+import { postRoute, tagRoute } from "../routes";
 
 const Template = ({ data }) => {
   const { site, post, nextPost, previousPost } = data;
@@ -54,11 +54,8 @@ const Template = ({ data }) => {
                 sx={{ listStyle: "none", display: "inline-block", p: 0, m: 0 }}
               >
                 {post.frontmatter.tags.map((tag) => (
-                  <Styled.li
-                    sx={{ display: "inline-block", ml: 2 }}
-                    key={kebabCase(tag)}
-                  >
-                    <Link href={`/tags/${kebabCase(tag)}`}>{tag}</Link>
+                  <Styled.li sx={{ display: "inline-block", ml: 2 }} key={tag}>
+                    <Link href={tagRoute(tag)}>{tag}</Link>
                   </Styled.li>
                 ))}
               </Styled.ul>
@@ -76,11 +73,7 @@ const Template = ({ data }) => {
         >
           {previousPost && (
             <div>
-              <Link
-                href={"/" + previousPost.frontmatter.slug || previousPost.slug}
-              >
-                &larr; Newer post
-              </Link>
+              <Link href={postRoute(previousPost)}>&larr; Newer post</Link>
               <br />
               <span sx={{ color: "primary" }}>
                 {previousPost.frontmatter.title}
@@ -89,9 +82,7 @@ const Template = ({ data }) => {
           )}
           {nextPost && (
             <div sx={{ textAlign: "right" }}>
-              <Link href={"/" + nextPost.frontmatter.slug || nextPost.slug}>
-                Older post &rarr;
-              </Link>
+              <Link href={postRoute(nextPost)}>Older post &rarr;</Link>
               <br />
               <span sx={{ color: "primary" }}>
                 {nextPost.frontmatter.title}
@@ -106,14 +97,6 @@ const Template = ({ data }) => {
 };
 
 export const pageQuery = graphql`
-  fragment PostPagination on Mdx {
-    frontmatter {
-      title
-      slug
-    }
-    slug
-  }
-
   query($id: String!, $nextPostId: String, $previousPostId: String) {
     site {
       siteMetadata {
@@ -140,10 +123,10 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 200)
     }
     nextPost: mdx(id: { eq: $nextPostId }) {
-      ...PostPagination
+      ...PostLink
     }
     previousPost: mdx(id: { eq: $previousPostId }) {
-      ...PostPagination
+      ...PostLink
     }
   }
 `;
