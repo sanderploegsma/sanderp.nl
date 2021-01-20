@@ -7,9 +7,9 @@ import { Helmet } from "react-helmet";
 
 import Comments from "../comments";
 import Container from "../container";
-import FormattedDate from "../date";
 import Layout from "../layout";
 import Link from "../link";
+import { formatDate } from "../date";
 
 const Template = ({ data }) => {
   const { site, post, nextPost, previousPost } = data;
@@ -42,10 +42,10 @@ const Template = ({ data }) => {
         <meta property="og:image" content={seoImage} />
       </Helmet>
       <Container>
-        <Styled.h2 sx={{ mb: 0 }}>{post.frontmatter.title}</Styled.h2>
-        <Styled.p sx={{ variant: "text.emphasis.low", marginBlockStart: 0 }}>
-          Published <FormattedDate date={post.frontmatter.date} />
+        <Styled.p sx={{ variant: "text.emphasis.low", marginBlockEnd: 0 }}>
+          {formatDate(post.frontmatter.date)} &mdash; {post.timeToRead} min read
         </Styled.p>
+        <Styled.h2 sx={{ mt: 0 }}>{post.frontmatter.title}</Styled.h2>
         {post.frontmatter.tags && (
           <div>
             <Styled.p>
@@ -136,6 +136,7 @@ export const pageQuery = graphql`
       }
       slug
       body
+      timeToRead
       excerpt(pruneLength: 200)
     }
     nextPost: mdx(id: { eq: $nextPostId }) {

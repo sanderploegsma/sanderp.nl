@@ -1,12 +1,6 @@
-import React from "react";
 import { DateTime } from "luxon";
 
-const FormattedDate = ({ date }) => {
+export const formatDate = (date) => {
   const dt = DateTime.fromISO(date);
-
-  return (
-    <span title={dt.toLocaleString(DateTime.DATE_HUGE)}>{dt.toRelative()}</span>
-  );
+  return dt.toLocaleString(DateTime.DATE_MED);
 };
-
-export default FormattedDate;

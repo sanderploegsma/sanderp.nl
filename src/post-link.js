@@ -2,7 +2,7 @@
 import { jsx, Styled } from "theme-ui";
 import { graphql } from "gatsby";
 
-import FormattedDate from "./date";
+import { formatDate } from "./date";
 import Link from "./link";
 
 export const fragment = graphql`
@@ -23,7 +23,7 @@ export const fragment = graphql`
 export default ({ post }) => (
   <div>
     <Styled.p sx={{ variant: "text.emphasis.low", marginBlockEnd: 0 }}>
-      Published <FormattedDate date={post.frontmatter.date} />
+      {formatDate(post.frontmatter.date)} &mdash; {post.timeToRead} min read
     </Styled.p>
     <Styled.h2 sx={{ color: "primary", mt: 0 }}>
       <Link href={`/${post.frontmatter.slug || post.slug}`}>
