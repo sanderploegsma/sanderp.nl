@@ -12,7 +12,7 @@ import {
 } from "react-icons/io5";
 import { FaSpotify } from "react-icons/fa";
 
-import avatar from "./avatar.jpeg";
+import avatar from "./avatar.jpg";
 import Link from "./link";
 
 const SocialLink = ({ icon, url }) => (
