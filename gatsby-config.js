@@ -14,6 +14,7 @@ module.exports = {
       github: "https://github.com/sanderploegsma",
       linkedin: "https://linkedin.com/in/sanderploegsma",
       playstation: "https://my.playstation.com/profile/sanderploegsma",
+      reddit: "https://reddit.com/u/muchacho360",
       spotify: "https://open.spotify.com/user/sanderploegsma",
       stackoverflow: "https://stackoverflow.com/users/1595197/sander",
     },
