@@ -9,6 +9,7 @@ import {
   IoLogoPlaystation,
   IoLogoReddit,
   IoLogoStackoverflow,
+  IoLogoTwitter,
 } from "react-icons/io5";
 import { FaSpotify } from "react-icons/fa";
 
@@ -89,6 +90,7 @@ export default ({ short }) => {
             reddit
             spotify
             stackoverflow
+            twitter
           }
         }
       }
@@ -130,6 +132,7 @@ export default ({ short }) => {
           }}
         >
           <SocialLink icon={<IoLogoGithub />} url={social.github} />
+          <SocialLink icon={<IoLogoTwitter />} url={social.twitter} />
           <SocialLink icon={<IoLogoLinkedin />} url={social.linkedin} />
           <SocialLink
             icon={<IoLogoStackoverflow />}
