@@ -17,6 +17,7 @@ module.exports = {
       reddit: "https://reddit.com/u/muchacho360",
       spotify: "https://open.spotify.com/user/sanderploegsma",
       stackoverflow: "https://stackoverflow.com/users/1595197/sander",
+      twitter: "https://twitter.com/sanderploegsma",
     },
   },
   plugins: [
