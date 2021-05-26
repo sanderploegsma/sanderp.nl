@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import { jsx, Styled, Divider } from "theme-ui";
 import { graphql } from "gatsby";
-import { Disqus } from "gatsby-plugin-disqus";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Helmet } from "react-helmet";
 
 import AboutMe from "../about-me";
+import Comments from "../comments";
 import Container from "../container";
 import Layout from "../layout";
 import Link from "../link";
@@ -100,12 +100,11 @@ const Template = ({ data }) => {
         <Divider my={4} />
         <AboutMe short />
         <PostPagination newerPost={previousPost} olderPost={nextPost} />
-        <Disqus
-          config={{
-            identifier: slug,
-            url: pageUrl,
-            title: post.frontmatter.title,
-          }}
+        <Comments
+          identifier={slug}
+          title={post.frontmatter.title}
+          url={pageUrl}
+          sx={{ mt: 4 }}
         />
       </Container>
     </Layout>
