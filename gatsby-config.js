@@ -55,5 +55,11 @@ module.exports = {
         trackingIds: [`UA-35738635-2`],
       },
     },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `sanderp-nl`,
+      },
+    },
   ],
 };
