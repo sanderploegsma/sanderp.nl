@@ -2,11 +2,11 @@
 import { jsx, Styled, useColorMode } from "theme-ui";
 import { Disqus } from "gatsby-plugin-disqus";
 
-export default ({ identifier, url, title, ...props }) => {
+export default ({ identifier, url, title, sx, ...props }) => {
   const [colorMode] = useColorMode();
 
   return (
-    <Styled.div {...props}>
+    <Styled.div {...props} sx={sx}>
       <Disqus
         colorMode={colorMode}
         config={{
