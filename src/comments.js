@@ -10,9 +10,9 @@ export default ({ identifier, url, title, sx, ...props }) => {
       <Disqus
         colorMode={colorMode}
         config={{
-          identifier: slug,
-          url: pageUrl,
-          title: post.frontmatter.title,
+          identifier,
+          url,
+          title,
         }}
       />
     </Styled.div>
