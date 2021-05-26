@@ -57,7 +57,8 @@ const Template = ({ data }) => {
     ? `${post.frontmatter.title} - ${site.siteMetadata.title}`
     : post.frontmatter.title;
 
-  const pageUrl = site.siteMetadata.siteUrl + postRoute(post);
+  const slug = postRoute(post);
+  const pageUrl = site.siteMetadata.siteUrl + slug;
   const description = post.frontmatter.description || post.excerpt;
   const seoImage =
     post.frontmatter.seo &&
@@ -99,7 +100,12 @@ const Template = ({ data }) => {
         <Divider my={4} />
         <AboutMe short />
         <PostPagination newerPost={previousPost} olderPost={nextPost} />
-        <Comments sx={{ mt: 4 }} />
+        <Comments
+          identifier={slug}
+          title={post.frontmatter.title}
+          url={pageUrl}
+          sx={{ mt: 4 }}
+        />
       </Container>
     </Layout>
   );
