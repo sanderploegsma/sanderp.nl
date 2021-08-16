@@ -58,7 +58,15 @@ That, in my opinion is the way to code for today, while being able to come back 
 
 Here is an example to illustrate the power of F# when doing programming challenges.
 
-Suppose you are given a list of instructions that either tell you to advance (`A`) `x` steps, or rotate by `y` degrees clockwise (`R`) or counter-clockwise (`L`):
+Suppose you are given a list of instructions that either tell you to:
+
+- Advance a number of steps: the instruction `A10` means advance `10` steps, `A2` means advance `2` steps, etc.
+- Rotate by a number of degrees clockwise: the instruction `R90` means rotate `90` degrees clockwise, `R270` means rotate `270` degrees clockwise, etc.
+- Rotate by a number of degrees counter-clockwise: the instruction `L90` means rotate `90` degrees counter-clockwise, `L270` means rotate `270` degrees counter-clockwise, etc.
+
+For this example, assume that each rotation is always a multiple of 90 degrees.
+So, given a list of instructions and a starting position, you are asked to find out what the final position would be if all instructions were to be followed from top to bottom.
+Here is an example list of instructions:
 
 ```
 R180
@@ -67,91 +75,199 @@ L90
 A3
 ```
 
-Of course you can write a program that works with the raw instructions, but using F# it's as simple as declaring:
+### Using the type system
+
+Of course you can write a program that works with the raw instructions directly, but I challenge you to think about the domain of the problem.
+For starters, looking at the instructions we can already think of two things:
+
+1. Advancing by `n` steps means that we have to keep track of a position
+2. Rotating means that we have to keep track of a direction
+
+So, let's start there:
 
 ```fsharp
-type Instruction =
-  /// Advance a number of steps
-  | Advance of int
-  /// Rotate 90 degrees clockwise
-  | Rotate
-
-/// Retrieve a list of instructions from the given input string.
-let parseInstruction (instruction: string): Instruction list =
-  match instruction[0], int (instruction.Substring(1)) with
-  | 'A', steps -> [Advance steps]
-
-  // `R180` would result in [Rotate; Rotate]
-  | 'R', degrees -> List.replicate (degrees / 90) Rotate
-
-  // `L90` would result in [Rotate; Rotate; Rotate]
-  | 'L', degrees -> List.replicate ((360 - degrees) / 90) Rotate
-```
-
-Then, suppose I have to follow each instruction starting at `(0, 0)` and a direction `North`,
-I can use the type system to my full advantage:
-
-```fsharp
-type Instruction =
-  /// Advance a number of steps
-  | Advance of int
-  /// Rotate 90 degrees clockwise
-  | Rotate
-
-/// Retrieve a list of instructions from the given input string.
-let parseInstruction (instruction: string): Instruction list =
-  match instruction[0], int (instruction.Substring(1)) with
-  | 'A', steps -> [Advance steps]
-
-  // `R180` would result in [Rotate; Rotate]
-  | 'R', degrees -> List.replicate (degrees / 90) Rotate
-
-  // `L90` would result in [Rotate; Rotate; Rotate]
-  | 'L', degrees -> List.replicate ((360 - degrees) / 90) Rotate
-
 type Position = int * int
 
 type Direction = North | East | South | West
+```
 
-/// Retrieve a new position by moving `n` steps in a given direction from a given position
-let move (n: int) (direction: Direction) ((x, y): Position): Position =
+Next up, we have the instructions themselves. Discriminated unions here are a great way to model which types of instructions your program can handle, so let's do that!
+We could define a type that is very close to the original description, like so:
+
+```fsharp
+type Instruction =
+  | Advance of steps:int
+  | RotateRight of degrees:int
+  | RotateLeft of degrees:int
+```
+
+But, remember that we could assume that rotations are always multiples of 90 degrees? Defining our type this way means that the business logic of our solution has to "know" this,
+and handle inputs such as `RotateRight(11)` as invalid. However, if we build that assumption into our design, we can simplify the business logic greatly, resulting in less room for nasty bugs.
+
+```fsharp
+type Instruction =
+  /// Advance one step in the current direction
+  | Advance
+  /// Rotate 90 degrees clockwise
+  | RotateRight
+  /// Rotate 90 degrees counter-clockwise
+  | RotateLeft
+```
+
+### Writing the business logic
+
+Now that we have modeled the domain of our challenge using the type system, we can think about how we can write the business logic for our challenge.
+First, we can come up with functions that allow us to follow either one of the instructions:
+
+```fsharp
+/// Calculate the position when advancing one step in the given direction from the given position
+let advance (direction: Direction) (position: Position): Position =
+  let x, y = position
   match direction with
-  | North -> (x, y + n)
-  | East -> (x + n, y)
-  | South -> (x, y - n)
-  | West -> (x - n, y)
+  | North -> (x, y + 1)
+  | East -> (x + 1, y)
+  | South -> (x, y - 1)
+  | West -> (x - 1, y)
 
-/// Retrieve a new direction by rotating 90 degrees clockwise from a given direction
-let rotate (direction: Direction): Direction =
+/// Calculate the new direction when rotating right from the given direction
+let rotateRight (direction: Direction): Direction =
   match direction with
   | North -> East
   | East -> South
   | South -> West
   | West -> North
 
-type State = Position * Direction
+/// Calculate the new direction when rotating left from the given direction
+let rotateLeft (direction: Direction): Direction =
+  match direction with
+  | North -> West
+  | East -> North
+  | South -> East
+  | West -> South
+```
 
-/// Retrieve a new state by applying the given instruction to the given state
-let eval ((position, direction): State) (instruction: Instruction): State =
+No rocket science there, right? Now that we have these functions to follow a single instruction, all we need is a way to combine them.
+To do so, we can think about our problem like a state machine: given a current state and an instruction, perform an operation to obtain a new state.
+
+First, let's define a type for our state, which consists of the current position and direction:
+
+```fsharp
+type State = { Position: Position; Direction: Direction }
+```
+
+Then, we can come up with our state machine function:
+
+```fsharp
+let applyInstruction (currentState: State) (instruction: Instruction): State =
   match instruction with
-  // When advancing, the position changes and the direction stays the same
-  | Advance steps -> (position |> move steps direction), direction
+  /// When advancing, the new state consists of a new position, while the direction remains unchanged
+  | Advance -> { currentState with Position = advance currentState.Direction currentState.Position }
 
-  // When rotating, the position stays the same and the direction changes
-  | Rotate -> position, (direction |> rotate)
+  /// When rotating, the new state consists of a new direction, while the position remains unchanged
+  | RotateRight -> { currentState with Direction = rotateRight currentState.Direction }
+  | RotateLeft -> { currentState with Direction = rotateLeft currentState.Direction }
+```
 
-let initialState: State = (0, 0), North
+Again, this function is really straight-forward. The type system helps us to express the intent of each function clearly,
+and the way we modeled the domain means we can focus on one thing only, without having to think about input validation or other edge cases.
+
+The only thing left to complete our business logic is a function that calculates the final state after following all instructions.
+This is where F# (and functional programming in general) really shines, because we can use a built-in function for it!
+
+```fsharp
+let initialState = { Position = (0, 0); Direction = North }
+let finalState = Seq.fold applyInstruction initialState instructions
+```
+
+### Completing the solution
+
+With the types and the business logic complete, we can wrap up our solution. All we need is some plumbing code to parse the instructions and output the answer.
+For reference, here is the full solution:
+
+```fsharp
+open System.IO
+
+type Position = int * int
+
+type Direction = North | East | South | West
+
+type Instruction =
+  /// Advance one step in the current direction
+  | Advance
+  /// Rotate 90 degrees clockwise
+  | RotateRight
+  /// Rotate 90 degrees counter-clockwise
+  | RotateLeft
+
+type State = { Position: Position; Direction: Direction }
+
+/// Calculate the position when advancing one step in the given direction from the given position
+let advance (direction: Direction) (position: Position): Position =
+  let x, y = position
+  match direction with
+  | North -> (x, y + 1)
+  | East -> (x + 1, y)
+  | South -> (x, y - 1)
+  | West -> (x - 1, y)
+
+/// Calculate the new direction when rotating right from the given direction
+let rotateRight (direction: Direction): Direction =
+  match direction with
+  | North -> East
+  | East -> South
+  | South -> West
+  | West -> North
+
+/// Calculate the new direction when rotating left from the given direction
+let rotateLeft (direction: Direction): Direction =
+  match direction with
+  | North -> West
+  | East -> North
+  | South -> East
+  | West -> South
+
+/// Calculate a new state by applying the given instruction to the current state
+let applyInstruction (currentState: State) (instruction: Instruction): State =
+  match instruction with
+  // When advancing, the new state consists of a new position, while the direction remains unchanged
+  | Advance -> { currentState with Position = advance currentState.Direction currentState.Position }
+
+  // When rotating, the new state consists of a new direction, while the position remains unchanged
+  | RotateRight -> { currentState with Direction = rotateRight currentState.Direction }
+  | RotateLeft -> { currentState with Direction = rotateLeft currentState.Direction }
+
+/// Parse the given instruction text to a list of instructions.
+/// For example: given `A3` this will output `[Advance; Advance; Advance]`, and given `R180` it will output `[RotateRight; RotateRight]`.
+/// Attempting to parse an invalid instruction will throw an error.
+let parseInstruction (instruction: string): Instruction list =
+  match instruction[0], int (instruction.Substring(1)) with
+  | 'A', steps when steps >= 0 -> List.replicate steps Advance
+  | 'R', degrees when degrees >= 0 && degrees % 90 = 0 -> List.replicate (degrees / 90) RotateRight
+  | 'L', degrees when degrees >= 0 && degrees % 90 = 0 -> List.replicate (degrees / 90) RotateLeft
+  | _ -> failwithf "Invalid instruction '%s'" instruction
+
+let initialState = { Position = (0, 0); Direction = North }
 let finalState =
   File.ReadAllLines("input.txt")
   |> Seq.collect parseInstruction
-  |> Seq.fold eval initialState
+  |> Seq.fold applyInstruction initialState
 
-printfn "Final state: %A" finalState
-// With the example input this would print "Final state: ((3, -10), East)"
+printfn "Answer: %A" finalState.Position
+// With the example input this would print "Answer: (3, -10)"
 ```
 
 By taking the time to model the puzzle input using the F# type system, you end up with code that is easily composed from smaller parts,
-while the full implementation is still easy to follow.
+while the full implementation is still easy to follow. We are able to test the business logic easily because it only operates on valid inputs,
+and the type system can be used by the compiler to warn us if we forget to handle a specific type of instruction.
+
+One more thing that is common in Advent of Code challenges is a small twist: each puzzle contains two parts, where the second part builds on the first.
+So, with the above approach in mind, I challenge you to think about the following questions:
+
+- What if the solution should allow for instructions with negative values? Specifically, you should be able to move backwards (`A-5`), and rotate a negative number of degrees (`R-90`, `L-270`).
+- What if the solution should print the full path taken instead of just the final position?
+- What if the solution should be able to handle arbitrary rotations, like 11 degrees?
+
+For each of these cases, consider the impact on the solution above, and also how it would impact a more naive solution (for instance: one single function that loops over each instruction and applies it directly without using any types).
 
 ## Closing notes
 
