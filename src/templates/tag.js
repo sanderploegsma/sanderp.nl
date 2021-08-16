@@ -26,12 +26,14 @@ const Template = ({ data, pageContext }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={pageUrl} />
       </Helmet>
-      <Container sx={{ variant: "container.content" }}>
-        <Styled.h2>Blog posts tagged with "{tag}"</Styled.h2>
-        {posts.edges.map(({ node }) => (
-          <PostLink key={node.id} post={node} />
-        ))}
-      </Container>
+      <section>
+        <Container sx={{ variant: "container.content" }}>
+          <Styled.h2>Blog posts tagged with "{tag}"</Styled.h2>
+          {posts.edges.map(({ node }) => (
+            <PostLink key={node.id} post={node} />
+          ))}
+        </Container>
+      </section>
     </Layout>
   );
 };

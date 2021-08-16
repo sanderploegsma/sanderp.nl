@@ -26,13 +26,19 @@ const IndexPage = ({ data }) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={siteUrl} />
       </Helmet>
-      <Container sx={{ variant: "container.content" }}>
-        <AboutMe />
-        <Styled.h2>Blog posts</Styled.h2>
-        {posts.edges.map(({ node }) => (
-          <PostLink key={node.id} post={node} />
-        ))}
-      </Container>
+      <section sx={{ variant: "section.muted", pt: [2, 2, 4] }}>
+        <Container>
+          <AboutMe />
+        </Container>
+      </section>
+      <section>
+        <Container sx={{ variant: "container.content" }}>
+          <Styled.h2>Blog posts</Styled.h2>
+          {posts.edges.map(({ node }) => (
+            <PostLink key={node.id} post={node} />
+          ))}
+        </Container>
+      </section>
     </Layout>
   );
 };
