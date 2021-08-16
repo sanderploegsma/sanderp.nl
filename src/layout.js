@@ -26,7 +26,7 @@ const ThemeToggle = () => {
         cursor: "pointer",
         color: "text",
         "&:hover": {
-          color: "secondary",
+          color: "primary",
         },
       }}
       onClick={toggle}
@@ -37,10 +37,9 @@ const ThemeToggle = () => {
 };
 
 const Header = () => (
-  <div sx={{ bg: "muted" }}>
+  <div>
     <Container
       sx={{
-        // py: [2, 2, 3],
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",

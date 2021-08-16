@@ -4,20 +4,22 @@ import { alpha } from "@theme-ui/color";
 export default {
   useColorSchemeMediaQuery: true,
   colors: {
-    background: "#f6f8fa",
-    muted: "#ffffff",
-    text: "#24292e",
-    textInverted: "#24292e",
-    primary: "#f2851c",
-    secondary: "#e21635",
+    background: "#ffffff",
+    muted: "#eaeaea",
+    text: "#1d1e1e",
+    textInverted: "#ffffff",
+    primary: "#c8133e",
+    secondary: "#4e2f4b",
+    tertiary: "#f9f9f9",
     modes: {
       dark: {
-        background: "#121212",
-        muted: "#272727",
-        text: "#ffffff",
-        textInverted: "#121212",
-        primary: "#ffe4a4",
-        secondary: "#fdbf6e",
+        background: "#1f2527",
+        muted: "#333333",
+        text: "#eef4f7",
+        textInverted: "#364043",
+        primary: "#62ccc7",
+        secondary: "#fbe6aa",
+        tertiary: "#364043",
       },
     },
   },
@@ -35,6 +37,11 @@ export default {
   container: {
     content: {
       mt: [3, 3, 5],
+    },
+  },
+  section: {
+    muted: {
+      bg: "muted",
     },
   },
   text: {

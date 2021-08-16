@@ -39,7 +39,11 @@ export default ({ tags, sx, ...props }) => (
       >
         <Link
           href={tagRoute(tag)}
-          sx={{ textDecoration: "none", fontSize: [0, 1] }}
+          sx={{
+            textDecoration: "none",
+            fontSize: [0, 1],
+            "&:hover": { color: "inherit" },
+          }}
         >
           {tag}
         </Link>

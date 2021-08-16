@@ -23,7 +23,7 @@ export const fragment = graphql`
 `;
 
 export default ({ post }) => (
-  <div>
+  <div sx={{ mb: [4, 4, 5] }}>
     <Styled.p
       sx={{
         variant: "text.emphasis.low",
@@ -33,7 +33,12 @@ export default ({ post }) => (
     >
       {formatDate(post.frontmatter.date)} &mdash; {post.timeToRead} min read
     </Styled.p>
-    <Styled.h2 sx={{ color: "primary", mt: 0, mb: [1, 2] }}>
+    <Styled.h2
+      sx={{
+        mt: 0,
+        mb: [1, 2],
+      }}
+    >
       <Link href={postRoute(post)}>{post.frontmatter.title}</Link>
     </Styled.h2>
     <Styled.p sx={{ variant: "text.emphasis.high", marginBlockStart: [1, 2] }}>
@@ -42,6 +47,5 @@ export default ({ post }) => (
     {post.frontmatter.tags && (
       <Tags tags={post.frontmatter.tags} sx={{ mt: 3 }} />
     )}
-    <Styled.hr sx={{ mt: [3, 4], mb: [3, 4] }} />
   </div>
 );

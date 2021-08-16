@@ -15,6 +15,9 @@ export const Link = ({ href, ...props }) =>
       rel="noopener noreferrer"
       sx={{
         color: "inherit",
+        "&:hover": {
+          color: "primary",
+        },
         "&.active": {
           color: "primary",
         },
@@ -26,6 +29,9 @@ export const Link = ({ href, ...props }) =>
       to={href}
       sx={{
         color: "inherit",
+        "&:hover": {
+          color: "primary",
+        },
         "&.active": {
           color: "primary",
         },
