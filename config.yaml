@@ -3,6 +3,9 @@ baseUrl: /
 theme: hello-friend
 paginate: 10
 
+params:
+  showReadingTime: "true"
+
 languages:
   en:
     title: Sander Ploegsma
