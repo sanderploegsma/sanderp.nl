@@ -1,0 +1,19 @@
+languageCode: en-us
+baseUrl: /
+theme: hello-friend
+paginate: 10
+
+languages:
+  en:
+    title: Sander Ploegsma
+
+    params:
+      logo:
+        logoText: sander ploegsma
+        logoHomeLink: /
+
+    menu:
+      main:
+        - identifier: about
+          name: About me
+          url: /about-me
