@@ -1,8 +1,6 @@
 +++
 author = "Sander Ploegsma"
-categories = ["Software Engineering"]
 date = 2017-05-30T08:00:00Z
-draft = false
 aliases = ["/running-redis-cluster-on-kubernetes-e451bda76cad"]
 description = "If a single-node Redis is not enough for your scaling needs, consider using Redis Cluster. Note: this guide is probably outdated."
 tags = ["Software Engineering"]
