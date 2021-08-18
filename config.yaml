@@ -1,7 +1,7 @@
 languageCode: en-us
 baseUrl: https://www.sanderp.nl
 theme: hello-friend
-paginate: 10
+googleAnalytics: UA-35738635-2
 
 params:
   showReadingTime: "true"
