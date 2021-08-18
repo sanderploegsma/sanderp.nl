@@ -8,7 +8,7 @@ title = "Debugging Go concurrency issues"
 
 +++
 
-{{< figure src="gopher.png" position="center" >}}
+{{< image src="gopher.png" position="center" >}}
 
 Recently I’ve been working on a Go application that uses Google Cloud Pub/Sub to migrate large amounts of Google Cloud Datastore entities efficiently and resiliently. Basically, a master process queries entities and publishes them to a Pub/Sub topic, ready to be consumed by multiple workers.
 

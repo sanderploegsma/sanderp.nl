@@ -244,7 +244,7 @@ I had a lot of fun participating in Advent of Code 2020, while simultaneously pr
 
 For those interested, all of my Advent of Code solutions are available on GitHub: [sanderploegsma/advent-of-code](https://github.com/sanderploegsma/advent-of-code).
 
-{{< figure src="i-heart-fsharp.png" position="center" >}}
+{{< image src="i-heart-fsharp.png" position="center" >}}
 
 ## Recommended reading
 

@@ -6,8 +6,6 @@ title = "About me"
 
 +++
 
-{{< imgproc "avatar.jpg" Resize "200x" center />}}
-
 I like functional programming, code puzzles, cloud stuff and high-tech products.
 
 Over the years I have done both back-end and front-end development, using different languages, runtimes and frameworks. Top contenders are (in no particular order): C#/.NET, Java, Kotlin, F#/.NET, Javascript, Typescript, React, Spring Framework, Apache Flink, Kubernetes, Google Cloud Platform, Serverless Functions and Gatsby.js.

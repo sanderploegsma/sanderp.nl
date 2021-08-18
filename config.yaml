@@ -1,22 +1,39 @@
-languageCode: en-us
 baseUrl: https://www.sanderp.nl
-theme: hello-friend
-paginate: 10
+languageCode: en-us
+theme: hello-friend-ng
+title: Sander Ploegsma
 
 params:
-  showReadingTime: "true"
+  homeSubtitle: I occasionally write about stuff that I encounter in my professional life. Also, I may ramble about stuff I find interesting.
+  enableThemeToggle: "true"
+  customJS:
+    - https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-fsharp.min.js
+  logo:
+    logoText: sander ploegsma
+    logoHomeLink: /
+  portrait:
+    path: /images/avatar.jpg
+    alt: Avatar
+  footer:
+    rss: "true"
+    topText:
+      - Built with Hugo
+      - <a href="https://github.com/sanderploegsma/sanderp.nl" target="_blank" rel="noopener">Source on GitHub</a>
+  social:
+    - name: github
+      url: https://github.com/sanderploegsma
+    - name: linkedin
+      url: https://linkedin.com/in/sanderploegsma
+    - name: stackoverflow
+      url: https://stackoverflow.com/users/1595197/sander
+    - name: spotify
+      url: https://open.spotify.com/user/sanderploegsma
 
-languages:
-  en:
-    title: Sander Ploegsma
-
-    params:
-      logo:
-        logoText: sander ploegsma
-        logoHomeLink: /
-
-    menu:
-      main:
-        - identifier: about
-          name: About me
-          url: /about-me
+menu:
+  main:
+    - identifier: about
+      name: About me
+      url: /about-me
+    - identifier: blog
+      name: Blog
+      url: /posts
