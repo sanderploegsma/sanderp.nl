@@ -5,6 +5,7 @@ googleAnalytics: UA-35738635-2
 
 params:
   showReadingTime: "true"
+  contentTypeName: posts
 
 languages:
   en:
