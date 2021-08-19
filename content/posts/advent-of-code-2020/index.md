@@ -1,12 +1,14 @@
-+++
-author = "Sander Ploegsma"
-date = 2021-01-19T10:00:00Z
-aliases = ["/advent-of-code-2020"]
-description = "They promised me fun and profit when using F#. I have to say, they were right."
-tags = ["Functional Programming", "Advent of Code"]
-title = "Advent of Code 2020: Having fun with F#"
-
-+++
+---
+author: Sander Ploegsma
+date: "2021-01-19T10:00:00Z"
+aliases:
+  - /advent-of-code-2020
+description: They promised me fun and profit when using F#. I have to say, they were right.
+tags:
+  - "Functional Programming"
+  - "Advent of Code"
+title: "Advent of Code 2020: Having fun with F#"
+---
 
 The last month of each year is always a special one. As some might be familiar with the concept of an [advent calendar](https://en.wikipedia.org/wiki/Advent_calendar), there is a special competition starting each year on December 1st: [Advent of Code](https://adventofcode.com/). Counting down each day until Christmas, you are sent off on an adventure that requires you to solve a series of puzzles. Each day a new challenge is unlocked, and each challenge consists of two parts. Solving a challenge successfully yields you _gold stars_, and obtaining the total of 50 gold stars usually means you have saved Christmas.
 

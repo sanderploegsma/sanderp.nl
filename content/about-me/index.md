@@ -1,10 +1,6 @@
-+++
-description = ""
-draft = false
-slug = "about-me"
-title = "About me"
-
-+++
+---
+title: About me
+---
 
 {{< imgproc "avatar.jpg" Resize "200x" center />}}
 

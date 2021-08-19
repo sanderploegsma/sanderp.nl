@@ -1,12 +1,13 @@
-+++
-author = "Sander Ploegsma"
-date = 2017-05-30T08:00:00Z
-aliases = ["/running-redis-cluster-on-kubernetes-e451bda76cad"]
-description = "If a single-node Redis is not enough for your scaling needs, consider using Redis Cluster. Note: this guide is probably outdated."
-tags = ["Software Engineering"]
-title = "Running Redis Cluster on Kubernetes"
-
-+++
+---
+author: Sander Ploegsma
+date: "2017-05-30T08:00:00Z"
+aliases:
+  - /running-redis-cluster-on-kubernetes-e451bda76cad
+description: "If a single-node Redis is not enough for your scaling needs, consider using Redis Cluster. Note: this guide is probably outdated."
+tags:
+  - Software Engineering
+title: Running Redis Cluster on Kubernetes
+---
 
 After successfully running a single Redis GCE instance to manage our inter-service communication for a couple of years, we finally started to run into scaling issues. To solve these, we started working out a way to reliably run a set of Redis instances as a cluster in our Kubernetes cluster.
 
