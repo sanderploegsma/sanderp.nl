@@ -8,7 +8,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Sander Ploegsma",
   tagline: "My blog",
-  url: "https://www.sanderp.nl/",
+  url: process.env.URL || "https://www.sanderp.nl/",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
