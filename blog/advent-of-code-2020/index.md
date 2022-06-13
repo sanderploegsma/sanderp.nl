@@ -1,6 +1,6 @@
 ---
-author: Sander Ploegsma
-date: "2021-01-19T10:00:00Z"
+authors: sanderp
+date: "2021-01-19T10:00"
 aliases:
   - /advent-of-code-2020
 description: They promised me fun and profit when using F#. I have to say, they were right.
@@ -246,7 +246,7 @@ I had a lot of fun participating in Advent of Code 2020, while simultaneously pr
 
 For those interested, all of my Advent of Code solutions are available on GitHub: [sanderploegsma/advent-of-code](https://github.com/sanderploegsma/advent-of-code).
 
-{{< figure src="i-heart-fsharp.png" position="center" >}}
+![I heart fsharp](i-heart-fsharp.png)
 
 ## Recommended reading
 
