@@ -2,7 +2,7 @@
 title: About me
 ---
 
-{{< imgproc "avatar.jpg" Resize "200x" center />}}
+![Avatar](/img/avatar.jpg)
 
 I like functional programming, code puzzles, cloud stuff and high-tech products.
 

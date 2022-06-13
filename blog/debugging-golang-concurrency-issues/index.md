@@ -1,15 +1,17 @@
 ---
-author: Sander Ploegsma
-date: "2017-09-14T08:00:00Z"
-aliases:
-  - /debugging-golang-concurrency-issues-c979c588f9ea
+authors: sanderp
+date: "2017-09-14T08:00"
 description: 'Today I Learned: Go has a built-in "race detector" which helps you catch race conditions in production code. The Go toolchain really is awesome!'
 tags:
   - Software Engineering
 title: Debugging Go concurrency issues
 ---
 
-{{< figure src="gopher.png" position="center" >}}
+TIL: Go has a built-in "race detector" which helps you catch race conditions in production code. The Go toolchain really is awesome!
+
+<!-- truncate -->
+
+![Gopher, the Go mascot](gopher.png)
 
 Recently I’ve been working on a Go application that uses Google Cloud Pub/Sub to migrate large amounts of Google Cloud Datastore entities efficiently and resiliently. Basically, a master process queries entities and publishes them to a Pub/Sub topic, ready to be consumed by multiple workers.
 

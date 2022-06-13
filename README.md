@@ -1,10 +1,25 @@
-This repository contains my personal website/blog, which is a static site built using [Hugo](https://gohugo.io).
+# Website
 
-## Cheat Sheet
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-| Command                           | Description                                           |
-| --------------------------------- | ----------------------------------------------------- |
-| `hugo`                            | Build the site to the `public/` directory             |
-| `hugo server`                     | Start a local server to serve content with hot reload |
-| `hugo new posts/new-post-slug.md` | Create a new post                                     |
-| `git submodule update --remote`   | Pull submodule changes (themes), commit afterwards    |
+### Installation
+
+```
+$ yarn
+```
+
+### Local Development
+
+```
+$ yarn start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build
+
+```
+$ yarn build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.

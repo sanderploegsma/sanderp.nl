@@ -1,8 +1,6 @@
 ---
-author: Sander Ploegsma
-date: "2021-01-19T10:00:00Z"
-aliases:
-  - /advent-of-code-2020
+authors: sanderp
+date: "2021-01-19T10:00"
 description: They promised me fun and profit when using F#. I have to say, they were right.
 tags:
   - "Functional Programming"
@@ -11,6 +9,8 @@ title: "Advent of Code 2020: Having fun with F#"
 ---
 
 The last month of each year is always a special one. As some might be familiar with the concept of an [advent calendar](https://en.wikipedia.org/wiki/Advent_calendar), there is a special competition starting each year on December 1st: [Advent of Code](https://adventofcode.com/). Counting down each day until Christmas, you are sent off on an adventure that requires you to solve a series of puzzles. Each day a new challenge is unlocked, and each challenge consists of two parts. Solving a challenge successfully yields you _gold stars_, and obtaining the total of 50 gold stars usually means you have saved Christmas.
+
+<!-- truncate -->
 
 Each event also comes with its own _leaderboard_: You score points based on the time it takes you to complete a challenge. Ending up on this leaderboard is notoriously hard though: only the top 100 receives any points at all. However, for many of us (including myself), being able to complete all puzzles as they unlock is enough of a challenge. It's a good way to brush up on your problem solving skills, knowledge of algorithms, or just to practice coding in a new programming language.
 
@@ -246,7 +246,7 @@ I had a lot of fun participating in Advent of Code 2020, while simultaneously pr
 
 For those interested, all of my Advent of Code solutions are available on GitHub: [sanderploegsma/advent-of-code](https://github.com/sanderploegsma/advent-of-code).
 
-{{< figure src="i-heart-fsharp.png" position="center" >}}
+![I heart fsharp](i-heart-fsharp.png)
 
 ## Recommended reading
 
