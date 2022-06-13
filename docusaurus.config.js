@@ -8,7 +8,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Sander Ploegsma",
   tagline: "My blog",
-  url: "https://www.sanderp.nl",
+  url: "https://www.sanderp.nl/",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -39,6 +39,25 @@ const config = {
           trackingID: "UA-35738635-2",
         },
       }),
+    ],
+  ],
+
+  plugins: [
+    [
+      "client-redirects",
+      /** @type {import('@docusaurus/plugin-client-redirects').Options} */
+      {
+        redirects: [
+          {
+            to: "/debugging-golang-concurrency-issues",
+            from: "/debugging-golang-concurrency-issues-c979c588f9ea",
+          },
+          {
+            to: "/running-redis-cluster-on-kubernetes",
+            from: "/running-redis-cluster-on-kubernetes-e451bda76cad",
+          },
+        ],
+      },
     ],
   ],
 

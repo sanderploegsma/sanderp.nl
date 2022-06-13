@@ -1,8 +1,6 @@
 ---
 authors: sanderp
 date: "2017-09-14T08:00"
-aliases:
-  - /debugging-golang-concurrency-issues-c979c588f9ea
 description: 'Today I Learned: Go has a built-in "race detector" which helps you catch race conditions in production code. The Go toolchain really is awesome!'
 tags:
   - Software Engineering

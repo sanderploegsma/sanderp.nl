@@ -1,8 +1,6 @@
 ---
 authors: sanderp
 date: "2021-01-19T10:00"
-aliases:
-  - /advent-of-code-2020
 description: They promised me fun and profit when using F#. I have to say, they were right.
 tags:
   - "Functional Programming"
