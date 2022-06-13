@@ -1,4 +1,8 @@
 [build]
 publish = "build"
 command = "yarn build"
-environment = { NODE_VERSION = "16.14" }
+
+[build.environment]
+NODE_VERSION = "16.14"
+YARN_VERSION = "1.22.18"
+NETLIFY_USE_YARN = "true"
