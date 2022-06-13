@@ -27,6 +27,7 @@ const config = {
         blog: {
           showReadingTime: true,
           routeBasePath: "/",
+          blogSidebarCount: 0,
         },
         pages: {
           path: "pages",
