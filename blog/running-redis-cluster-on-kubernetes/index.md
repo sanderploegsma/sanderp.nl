@@ -11,6 +11,8 @@ title: Running Redis Cluster on Kubernetes
 
 After successfully running a single Redis GCE instance to manage our inter-service communication for a couple of years, we finally started to run into scaling issues. To solve these, we started working out a way to reliably run a set of Redis instances as a cluster in our Kubernetes cluster.
 
+<!-- truncate -->
+
 ![An applicable meme](yo-dawg.jpeg)
 
 As you may or may not know, Redis Cluster is a set of Redis instances working together to make your data storage scale across nodes while also making it a bit more resilient. Data is automatically split across nodes and it supports a master/slave setup for increased availability in case of a failure. For more information, [check their excellent tutorial](https://redis.io/topics/cluster-tutorial).
