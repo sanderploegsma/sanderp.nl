@@ -79,6 +79,10 @@ const config = {
                 href: "https://github.com/sanderploegsma",
               },
               {
+                label: "GitLab",
+                href: "https://gitlab.com/sanderploegsma",
+              },
+              {
                 label: "Twitter",
                 href: "https://twitter.com/sanderploegsma",
               },
