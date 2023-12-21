@@ -1,8 +1,10 @@
 [build]
-publish = "build"
-command = "yarn build"
+command = "hugo --gc --minify -b $URL"
+publish = "public"
 
-[build.environment]
-NODE_VERSION = "16.14"
-YARN_VERSION = "1.22.18"
-NETLIFY_USE_YARN = "true"
+[context.production.environment]
+HUGO_ENV = "production"
+HUGO_ENABLEGITINFO = "true"
+
+[context.deploy-preview]
+command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"

@@ -1,25 +1,20 @@
-# Website
+# sanderp.nl
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+This website is built using [Hugo](https://gohugo.io/).
 
-### Installation
+## Local Development
 
-```
-$ yarn
-```
-
-### Local Development
-
-```
-$ yarn start
+```sh
+$ hugo server
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+This command starts a local development server.
+Most changes are reflected live without having to restart the server.
 
-### Build
+## Build
 
+```sh
+$ hugo
 ```
-$ yarn build
-```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+This command generates static content into the `public` directory and can be served using any static contents hosting service.
