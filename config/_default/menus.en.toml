@@ -15,11 +15,6 @@ name = "Blog"
 pageRef = "posts"
 weight = 10
 
-[[main]]
-name = "About Me"
-pageRef = "about-me"
-weight = 20
-
 
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before

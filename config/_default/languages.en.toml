@@ -16,7 +16,7 @@ description = "My personal blog"
 [author]
 name = "Sander Ploegsma"
 image = "/img/avatar.jpg"
-headline = "I like functional programming, code puzzles, cloud stuff and high-tech products."
+# headline = ""
 bio = "I like functional programming, code puzzles, cloud stuff and high-tech products."
 links = [
   #     { email = "mailto:hello@your_domain.com" },
