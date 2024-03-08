@@ -2,6 +2,10 @@
 # Refer to the theme docs for more details about each of these parameters.
 # https://blowfish.page/docs/getting-started/
 
+[module]
+[[module.imports]]
+path = "github.com/nunocoracao/blowfish/v2"
+
 theme = "blowfish"
 baseURL = "https://sanderp.nl/"
 defaultContentLanguage = "en"
